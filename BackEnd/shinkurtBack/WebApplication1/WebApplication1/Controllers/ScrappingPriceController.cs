@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Net.Http.Headers;
 using System.Collections;
 using System.Linq;
 using WebApplication1.Data;
@@ -39,14 +40,28 @@ namespace WebApplication1.Controllers
             HtmlDocument doc = new HtmlDocument();
             doc.Load(stream);
                 var HeaderNames = doc.DocumentNode.SelectNodes("//h4[@class='flex align-middle']");
-             if(HeaderNames.Count >0 ) {     
-              foreach (var item in HeaderNames)
-              {
-                        pcomm.Name += item.InnerText;
-              }
+                //
+               
+                // 
+                if (HeaderNames.Count > 0 ) {
 
-                    commodities.Add(pcomm);
-              }
+                    var priceCommodities = new List<PriceCommodities>();
+
+                    foreach (var headerName in HeaderNames)
+                    {
+                        pcomm.Name = headerName.InnerText;
+                        //priceCommodities.Add(pcomm);
+                        commodities.Add(pcomm);
+                    }
+                    /*
+                     foreach (var item in HeaderNames)
+                     {
+                      pcomm.Name +=item.InnerText;
+                        }
+
+                  commodities.Add(pcomm);
+                     */
+                }
                 else
                 {
                     return BadRequest("couldn't find the request 0");
