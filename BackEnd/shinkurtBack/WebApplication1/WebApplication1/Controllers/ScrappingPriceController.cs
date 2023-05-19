@@ -5,7 +5,7 @@ namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ScrappingController : ControllerBase
+    public class ScrappingPriceController : ControllerBase
     {
 
         [Route("GetScrappName")]
