@@ -7,7 +7,7 @@ namespace WebApplication1.Model
     public class PriceCommodities
     {
         [Key]
-        [Required]
+        public int id { get; set; }
         public string Name { get; set; }
         public string? Month { get; set; }
         public double? Last { get; set; }

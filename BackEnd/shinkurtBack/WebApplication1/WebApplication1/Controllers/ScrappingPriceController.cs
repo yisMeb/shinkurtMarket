@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Net.Http.Headers;
+using System;
 using System.Collections;
 using System.Linq;
 using WebApplication1.Data;
@@ -27,12 +28,12 @@ namespace WebApplication1.Controllers
 
         [Route("GetScrappName")]
         [AcceptVerbs("GET")]
-        public async Task<ActionResult> GetScrappName()
+        public async Task<ActionResult> GetScrappName(int i)
         {
-            PriceCommodities pcomm =new PriceCommodities();
+            //PriceCommodities pcomm =new PriceCommodities();
             List<PriceCommodities> priceCommodities = new List<PriceCommodities>();
 
-            try
+           //try
            {  
             List<PriceCommodities> commodities = new List<PriceCommodities>();
             HttpClient hc = new HttpClient();
@@ -44,20 +45,28 @@ namespace WebApplication1.Controllers
                 //
                 // 
                 if (rows.Count > 0 ) {
-
+                    PriceCommodities[] p = new PriceCommodities[rows.Count];
+                    
+                    for (int j = 0; j < rows.Count; j++)
+                    {
+                        p[j] = new PriceCommodities(); // Initialize each element of the array
+                    }
+                    int k = 0;
                     foreach (HtmlNode obj in rows)
                     {
+                        
+                        PriceCommodities pcomm = new PriceCommodities();
                         HtmlNodeCollection cells = obj.SelectNodes("td");
-                        pcomm.Name = cells[0].InnerText;
-                        pcomm.Month = cells[1].InnerText;
-                        pcomm.Last = double.Parse(cells[2].InnerText);
-                        pcomm.High = double.Parse(cells[3].InnerText);
-                        pcomm.Low = double.Parse(cells[4].InnerText);
-                        pcomm.Change = cells[5].InnerText;
-                        pcomm.ChangePercentage = cells[6].InnerText;
-                        pcomm.Time = TimeOnly.Parse(cells[7].InnerText);
-                       
-                        commodities.Add(pcomm);
+                        p[k].Name  = cells[0].InnerText;
+                        p[k].Month = "Jul 23";//cells[1].InnerText;
+                        p[k].Last = double.Parse(cells[2].InnerText);
+                        p[k].High = double.Parse(cells[3].InnerText);
+                        p[k].Low = double.Parse(cells[4].InnerText);
+                        p[k].Change = cells[5].InnerText;
+                        p[k].ChangePercentage = cells[6].InnerText;
+                        //pcomm.Time = TimeOnly.Parse("14:20:05");
+                        commodities.Add(p[k]);
+                        k++;
                     }
                     /*
                      foreach (var item in HeaderNames)
@@ -80,10 +89,10 @@ namespace WebApplication1.Controllers
                     await _dbContext.SaveChangesAsync();
                 return Ok(commodities);
             }
-            catch
-            {
-                return BadRequest("couldn't find the request");
-            }
+            //catch
+            //{
+            //    return BadRequest("couldn't find the request error occured");
+            //}
         }
 
 

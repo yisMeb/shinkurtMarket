@@ -24,8 +24,11 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Model.PriceCommodities", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("Change")
                         .HasColumnType("nvarchar(max)");
@@ -45,7 +48,11 @@ namespace WebApplication1.Migrations
                     b.Property<string>("Month")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
 
                     b.ToTable("PriceCommodity");
                 });

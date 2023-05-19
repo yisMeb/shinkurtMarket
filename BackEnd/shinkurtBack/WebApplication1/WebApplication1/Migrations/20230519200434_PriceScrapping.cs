@@ -5,7 +5,7 @@
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class CommodityDb : Migration
+    public partial class PriceScrapping : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,9 @@ namespace WebApplication1.Migrations
                 name: "PriceCommodity",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Month = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Last = table.Column<double>(type: "float", nullable: true),
                     High = table.Column<double>(type: "float", nullable: true),
@@ -24,7 +26,7 @@ namespace WebApplication1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PriceCommodity", x => x.Name);
+                    table.PrimaryKey("PK_PriceCommodity", x => x.id);
                 });
         }
 
