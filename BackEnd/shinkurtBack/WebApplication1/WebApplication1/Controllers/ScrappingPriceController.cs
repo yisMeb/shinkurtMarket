@@ -30,8 +30,9 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> GetScrappName()
         {
             PriceCommodities pcomm =new PriceCommodities();
-           
-           try
+            List<PriceCommodities> priceCommodities = new List<PriceCommodities>();
+
+            try
            {  
             List<PriceCommodities> commodities = new List<PriceCommodities>();
             HttpClient hc = new HttpClient();
@@ -39,18 +40,23 @@ namespace WebApplication1.Controllers
             Stream stream = await result.Content.ReadAsStreamAsync();
             HtmlDocument doc = new HtmlDocument();
             doc.Load(stream);
-                var HeaderNames = doc.DocumentNode.SelectNodes("//h4[@class='flex align-middle']");
+                HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"__next\"]/div[2]/div/div/div[2]/main/div[3]/div[2]/table/tbody/tr");
                 //
-               
                 // 
-                if (HeaderNames.Count > 0 ) {
+                if (rows.Count > 0 ) {
 
-                    var priceCommodities = new List<PriceCommodities>();
-
-                    foreach (var headerName in HeaderNames)
+                    foreach (HtmlNode obj in rows)
                     {
-                        pcomm.Name = headerName.InnerText;
-                        //priceCommodities.Add(pcomm);
+                        HtmlNodeCollection cells = obj.SelectNodes("td");
+                        pcomm.Name = cells[0].InnerText;
+                        pcomm.Month = cells[1].InnerText;
+                        pcomm.Last = double.Parse(cells[2].InnerText);
+                        pcomm.High = double.Parse(cells[3].InnerText);
+                        pcomm.Low = double.Parse(cells[4].InnerText);
+                        pcomm.Change = cells[5].InnerText;
+                        pcomm.ChangePercentage = cells[6].InnerText;
+                        pcomm.Time = TimeOnly.Parse(cells[7].InnerText);
+                       
                         commodities.Add(pcomm);
                     }
                     /*
@@ -61,6 +67,7 @@ namespace WebApplication1.Controllers
 
                   commodities.Add(pcomm);
                      */
+                    ////FROM HERE
                 }
                 else
                 {
