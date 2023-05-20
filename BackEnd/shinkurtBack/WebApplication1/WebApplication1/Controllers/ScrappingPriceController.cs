@@ -7,12 +7,12 @@ using System;
 using System.Collections;
 using System.Linq;
 using WebApplication1.Data;
-using WebApplication1.Model;
+using WebApplication1.Model.Commodities;
 using static Azure.Core.HttpHeader;
 
 namespace WebApplication1.Controllers
 {
-     
+
 
     [Route("api/[controller]")]
     [ApiController]
@@ -40,9 +40,9 @@ namespace WebApplication1.Controllers
             HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"__next\"]/div[2]/div/div/div[2]/main/div[3]/div[2]/table/tbody/tr");
                 
                 if (rows.Count > 0 ) {
-                    PriceCommodities[] p = new PriceCommodities[rows.Count];
-                priceCommodities = await _dbContext.PriceCommodity.ToListAsync();
-                _dbContext.PriceCommodity.RemoveRange(priceCommodities);
+                   PriceCommodities[] p = new PriceCommodities[rows.Count];
+                   priceCommodities = await _dbContext.PriceCommodity.ToListAsync();
+                   _dbContext.PriceCommodity.RemoveRange(priceCommodities);
 
                 for (int j = 0; j < rows.Count; j++)
                     {
@@ -51,7 +51,6 @@ namespace WebApplication1.Controllers
                     int k = 0;
                     foreach (HtmlNode obj in rows)
                     {
-                        
                         PriceCommodities pcomm = new PriceCommodities();
                         HtmlNodeCollection cells = obj.SelectNodes("td");
                         p[k].Name  = cells[0].InnerText;
