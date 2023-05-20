@@ -18,9 +18,6 @@ namespace WebApplication1.Model
         public string? ChangePercentage { get; set; }
         [NotMapped]
         public TimeOnly? Time { get; set; }
-        public string[] Split(string value)
-        {
-            return value.Split(' ');
-        }
+        
     }
 }

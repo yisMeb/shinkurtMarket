@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<CommiditiesDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
