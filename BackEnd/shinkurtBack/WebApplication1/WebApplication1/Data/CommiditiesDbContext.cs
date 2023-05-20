@@ -15,8 +15,18 @@ namespace WebApplication1.Data
             optionsBuilder.EnableSensitiveDataLogging();
              // Configure other options for your DbContext
         }
-        
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PriceCommodities>(entity =>
+            {
+                // Set key for entity
+                entity.HasKey(p => p.id);
+            });
+
+            base.OnModelCreating(modelBuilder);
+        }
+
 
         public DbSet<PriceCommodities> PriceCommodity { get; set;}
     }

@@ -41,8 +41,10 @@ namespace WebApplication1.Controllers
                 
                 if (rows.Count > 0 ) {
                     PriceCommodities[] p = new PriceCommodities[rows.Count];
-                    
-                    for (int j = 0; j < rows.Count; j++)
+                priceCommodities = await _dbContext.PriceCommodity.ToListAsync();
+                _dbContext.PriceCommodity.RemoveRange(priceCommodities);
+
+                for (int j = 0; j < rows.Count; j++)
                     {
                         p[j] = new PriceCommodities(); // Initialize each element of the array
                     }
@@ -78,7 +80,7 @@ namespace WebApplication1.Controllers
                 }
                 foreach (PriceCommodities pc in commodities)
                 {
-                    await _dbContext.PriceCommodity.AddAsync(pc);
+                await _dbContext.PriceCommodity.AddAsync(pc);
                 }
                     await _dbContext.SaveChangesAsync();
                return Ok(commodities);
