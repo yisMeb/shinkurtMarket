@@ -16,11 +16,7 @@ namespace WebApplication1.Data
              // Configure other options for your DbContext
         }
         
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<PriceCommodities>().ToTable(tb => tb.HasTrigger("NoInsertion"));
-            base.OnModelCreating(modelBuilder);
-        }
+        
 
         public DbSet<PriceCommodities> PriceCommodity { get; set;}
     }
