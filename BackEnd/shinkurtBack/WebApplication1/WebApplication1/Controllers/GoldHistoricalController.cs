@@ -21,9 +21,9 @@ namespace WebApplication1.Controllers
             _dbContext = dbContext;
             _configuration = configuratio;
         }
-        [Route("GetGoldHistoryName")]
+        [Route("GetGoldHistoryDate")]
         [AcceptVerbs("GET")]
-        public async Task<ActionResult<IEnumerable<DateOnly>>> GetGoldHistoryName()
+        public async Task<ActionResult<IEnumerable<DateOnly>>> GetGoldHistoryDate()
         {
             var goldHistoryNames = await _dbContext.GoldHistories
                 .Select(g => ParseDate(g.Date))
