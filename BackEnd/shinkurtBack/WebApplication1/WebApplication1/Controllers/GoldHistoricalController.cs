@@ -14,12 +14,10 @@ namespace WebApplication1.Controllers
     public class GoldHistoricalController : ControllerBase
     {
         private readonly CommiditiesDbContext _dbContext;
-        private readonly IConfiguration _configuration;
 
-        public GoldHistoricalController(CommiditiesDbContext dbContext, IConfiguration configuratio)
+        public GoldHistoricalController(CommiditiesDbContext dbContext)
         {
             _dbContext = dbContext;
-            _configuration = configuratio;
         }
         [Route("GetGoldHistoryDate")]
         [AcceptVerbs("GET")]
