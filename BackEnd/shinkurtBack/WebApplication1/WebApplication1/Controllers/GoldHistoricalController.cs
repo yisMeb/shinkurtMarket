@@ -33,6 +33,14 @@ namespace WebApplication1.Controllers
 
             return Ok(dateOnlyValues);
         }
+        [Route("GetGoldHistoryAll")]
+        [AcceptVerbs("GET")]
+        public async Task<ActionResult<IEnumerable<GoldHistory>>> GetGoldHistoryAll()
+        {
+            var all = await _dbContext.GoldHistories.ToListAsync();
+
+            return Ok(all);
+        }
 
         private static DateTime ParseDate(string dateString)
         {
