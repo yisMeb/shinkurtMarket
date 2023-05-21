@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class commodityHistory : Migration
+    public partial class commodities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,10 +17,11 @@ namespace WebApplication1.Migrations
                 {
                     al_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -34,10 +36,11 @@ namespace WebApplication1.Migrations
                 {
                     brt_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -52,10 +55,11 @@ namespace WebApplication1.Migrations
                 {
                     co_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -70,10 +74,11 @@ namespace WebApplication1.Migrations
                 {
                     cuk_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -88,10 +93,11 @@ namespace WebApplication1.Migrations
                 {
                     crd_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -106,10 +112,11 @@ namespace WebApplication1.Migrations
                 {
                     fd_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -124,10 +131,11 @@ namespace WebApplication1.Migrations
                 {
                     gasoline_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -137,21 +145,22 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GoldHistory",
+                name: "GoldHistories",
                 columns: table => new
                 {
-                    GId = table.Column<int>(type: "int", nullable: false)
+                    g_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GoldHistory", x => x.GId);
+                    table.PrimaryKey("PK_GoldHistories", x => x.g_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,10 +169,11 @@ namespace WebApplication1.Migrations
                 {
                     cattle_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -178,10 +188,11 @@ namespace WebApplication1.Migrations
                 {
                     lcoffee_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -196,10 +207,11 @@ namespace WebApplication1.Migrations
                 {
                     lumber_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -214,10 +226,11 @@ namespace WebApplication1.Migrations
                 {
                     ngas_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -232,10 +245,11 @@ namespace WebApplication1.Migrations
                 {
                     oat_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -250,10 +264,11 @@ namespace WebApplication1.Migrations
                 {
                     orange_d = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -263,15 +278,35 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PriceCommodity",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Month = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Last = table.Column<double>(type: "float", nullable: true),
+                    High = table.Column<double>(type: "float", nullable: true),
+                    Low = table.Column<double>(type: "float", nullable: true),
+                    Change = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ChangePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PriceCommodity", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "silverHistories",
                 columns: table => new
                 {
                     slv_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -286,10 +321,11 @@ namespace WebApplication1.Migrations
                 {
                     uscorn_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -304,10 +340,11 @@ namespace WebApplication1.Migrations
                 {
                     usw_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -322,10 +359,11 @@ namespace WebApplication1.Migrations
                 {
                     xagId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -340,10 +378,11 @@ namespace WebApplication1.Migrations
                 {
                     ZId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Open = table.Column<double>(type: "float", nullable: true),
-                    High = table.Column<double>(type: "float", nullable: true),
-                    Low = table.Column<double>(type: "float", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -378,7 +417,7 @@ namespace WebApplication1.Migrations
                 name: "gasolineHistories");
 
             migrationBuilder.DropTable(
-                name: "GoldHistory");
+                name: "GoldHistories");
 
             migrationBuilder.DropTable(
                 name: "liveCattleHistories");
@@ -397,6 +436,9 @@ namespace WebApplication1.Migrations
 
             migrationBuilder.DropTable(
                 name: "orangeJuiceHistories");
+
+            migrationBuilder.DropTable(
+                name: "PriceCommodity");
 
             migrationBuilder.DropTable(
                 name: "silverHistories");

@@ -13,6 +13,23 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<CommiditiesDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
+
+var provider= builder.Services.BuildServiceProvider();
+var configuration=provider.GetService<IConfiguration>();
+/*
+builder.Services.AddCors(options =>
+{
+
+    var frontendUrl = configuration.GetValue<string>("frontend_url");
+
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader();
+    });
+
+});
+*/
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +40,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//app.UseCors();
+
+app.UseRouting();
 
 app.UseAuthorization();
 

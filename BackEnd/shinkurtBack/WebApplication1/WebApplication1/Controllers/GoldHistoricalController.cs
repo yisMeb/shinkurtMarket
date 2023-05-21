@@ -1,6 +1,9 @@
-﻿using HtmlAgilityPack;
+﻿using CsvHelper;
+using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Formats.Asn1;
+using System.Globalization;
 using WebApplication1.Data;
 using WebApplication1.Model.Commodities;
 
@@ -11,62 +14,35 @@ namespace WebApplication1.Controllers
     public class GoldHistoricalController : ControllerBase
     {
         private readonly CommiditiesDbContext _dbContext;
-        private readonly IConfiguration _configuration;
-        public GoldHistoricalController(CommiditiesDbContext context, IConfiguration configuration)
-        {
-            _dbContext = context;
-            _configuration = configuration;
-        }
-
-        [Route("GetGoldHistory")]
-        [AcceptVerbs("GET")]
-        public async Task<ActionResult> GetGoldHistoy(int i)
-        {
-            List<GoldHistory> goldPice = new List<GoldHistory>();
-            List<GoldHistory> Gold = new List<GoldHistory>();
-            HttpClient hc = new HttpClient();
-            HttpResponseMessage result = await hc.GetAsync($"https://www.investing.com/commodities/gold-historical-data");
-            Stream stream = await result.Content.ReadAsStreamAsync();
-            HtmlDocument doc = new HtmlDocument();
-            doc.Load(stream);
-            HtmlNodeCollection rows = doc.DocumentNode.SelectNodes("//*[@id=\"__next\"]/div[2]/div/div/div[2]/main/div/div[5]/div/div/div[3]/div/table/tbody/tr");
-            if (rows.Count > 0)
+            public GoldHistoricalController(CommiditiesDbContext dbContext )
             {
-                GoldHistory[] p = new GoldHistory[rows.Count];
-                goldPice = await _dbContext.GoldHistories.ToListAsync();
-                _dbContext.GoldHistories.RemoveRange(goldPice);
+                _dbContext = dbContext;
+                
+            }
 
-                for (int j = 0; j < rows.Count; j++)
+            [HttpPost("insert-csv")]
+            public IActionResult InsertDataFromCsv(IFormFile file)
+            {
+                if (file == null || file.Length <= 0)
+                    return BadRequest("No file uploaded.");
+
+                try
                 {
-                    p[j] = new GoldHistory(); // Initialize each element of the array
-                }
-                int k = 0;
-                foreach (HtmlNode obj in rows)
-                {
-                    GoldHistory pcomm = new GoldHistory();
-                    HtmlNodeCollection cells = obj.SelectNodes("td");
-                    p[k].Date = DateTime.Parse(cells[0].InnerText);
-                    p[k].Price = double.Parse(cells[1].InnerText);
-                    p[k].Open = double.Parse(cells[2].InnerText);
-                    p[k].High = double.Parse(cells[3].InnerText);
-                    p[k].Low = double.Parse(cells[4].InnerText);
-                    p[k].Volume = cells[5].InnerText;
-                    p[k].changePercentage = cells[6].InnerText;
-                    Gold.Add(p[k]);
-                    k++;
-                }
+                    using (var reader = new StreamReader(file.OpenReadStream()))
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        var records = csv.GetRecords<GoldHistory>().ToList();
 
+                       _dbContext.GoldHistories.AddRange(records);
+                        _dbContext.SaveChanges();
+
+                        return Ok(records);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"An error occurred while inserting data: {ex.Message}");
+                }
             }
-            else
-            {
-                return BadRequest("couldn't find the request 0");
-            }
-            foreach (GoldHistory pc in Gold)
-            {
-                await _dbContext.GoldHistories.AddAsync(pc);
-            }
-            await _dbContext.SaveChangesAsync();
-            return Ok(Gold);
         }
-    }
 }

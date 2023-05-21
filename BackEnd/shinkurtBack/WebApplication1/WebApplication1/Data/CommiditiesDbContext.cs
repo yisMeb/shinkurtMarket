@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CsvHelper.TypeConversion;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Reflection.Metadata;
 using WebApplication1.Model.Commodities;
@@ -27,6 +28,16 @@ namespace WebApplication1.Data
             base.OnModelCreating(modelBuilder);
         }
 
+        protected override void ConfigureConventions(ModelConfigurationBuilder builder)
+        {
+
+            builder.Properties<DateOnly>()
+                .HaveConversion<ConvertDate>()
+                .HaveColumnType("date");
+            base.ConfigureConventions(builder);
+
+        }
+
         public DbSet<GoldHistory> GoldHistories { get; set; }
         public DbSet<PriceCommodities> PriceCommodity { get; set;}
         public DbSet<AluminiumHistory> aluminiumHistories { get; set;}
@@ -36,7 +47,6 @@ namespace WebApplication1.Data
         public DbSet<CrudeOilWTIHistory> crudeOilWTIs { get; set;}
         public DbSet<FeederCattleHistory> feederCattleHistories { get; set;}
         public DbSet<GasolineHistory> gasolineHistories { get; set;}
-        public DbSet<GoldHistory> goldHistories { get; set;}
         public DbSet<LiveCattleHistory> liveCattleHistories { get; set;}
         public DbSet<LondonCoffe> londonCoffes { get; set;}
         public DbSet<LumberHistory> lumberHistories { get; set;}

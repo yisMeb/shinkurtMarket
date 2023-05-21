@@ -8,12 +8,11 @@ namespace WebApplication1.Model.Commodities
         [Key]
         public int ngas_Id { get; set; }
         [Required]
-        [NotMapped]
-        public DateTime Date { get; set; }
-        public double Price { get; set; }
-        public double? Open { get; set; }
-        public double? High { get; set; }
-        public double? Low { get; set; }
+        public DateOnly Date { get; set; }
+        public string Price { get; set; }
+        public string? Open { get; set; }
+        public string? High { get; set; }
+        public string? Low { get; set; }
         public string? Volume { get; set; }
         [Display(Name = "Change %")]
         public string? changePercentage { get; set; }

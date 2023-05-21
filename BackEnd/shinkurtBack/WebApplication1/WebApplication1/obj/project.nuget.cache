@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "LTo9PalsMr48aZMpIDDowZLnlnX++itpmGzpBOV2nUU1v3QJi8iy1WitzvuQ8tB5bAUUhCH53U8nvjH8EkgXBQ==",
+  "dgSpecHash": "jDFV2wsEpykUoJ4RmW7+Z0d+iNY3m5bPqWEYwDLrhZDh0kMEztVqjpfgomnIg9L9e6X1HoHsxqWcbOrk8z8aGg==",
   "success": true,
   "projectFilePath": "C:\\Users\\asus\\Downloads\\gituploads\\shinkurtMarket\\BackEnd\\shinkurtBack\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\asus\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\asus\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\htmlagilitypack\\1.11.46\\htmlagilitypack.1.11.46.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
