@@ -47,25 +47,8 @@ namespace WebApplication1.Migrations
                 {
                     table.PrimaryKey("PK_brentOilHistories", x => x.brt_Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "copperHistories",
-                columns: table => new
-                {
-                    Date = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    High = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Volume = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    changePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_copperHistories", x => x.Date);
-                });
-
-            migrationBuilder.CreateTable(
+             
+               migrationBuilder.CreateTable(
                 name: "copperUkHistories",
                 columns: table => new
                 {

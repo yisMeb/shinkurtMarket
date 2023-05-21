@@ -30,7 +30,7 @@ namespace WebApplication1.Controllers
         [AcceptVerbs("GET")]
         public async Task<ActionResult> GetScrappName(int i)
         {
-            List<PriceCommodities> priceCommodities = new List<PriceCommodities>(); 
+            List<PriceCommodities> priceCommodities = new List<PriceCommodities>();
             List<PriceCommodities> commodities = new List<PriceCommodities>();
             HttpClient hc = new HttpClient();
             HttpResponseMessage result = await hc.GetAsync($"https://www.investing.com/commodities/real-time-futures");
@@ -43,7 +43,7 @@ namespace WebApplication1.Controllers
                    PriceCommodities[] p = new PriceCommodities[rows.Count];
                    priceCommodities = await _dbContext.PriceCommodity.ToListAsync();
                    _dbContext.PriceCommodity.RemoveRange(priceCommodities);
-
+                    
                 for (int j = 0; j < rows.Count; j++)
                     {
                         p[j] = new PriceCommodities(); // Initialize each element of the array

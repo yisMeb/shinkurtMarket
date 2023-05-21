@@ -31,7 +31,6 @@ namespace WebApplication1.Data
         public DbSet<PriceCommodities> PriceCommodity { get; set;}
         public DbSet<AluminiumHistory> aluminiumHistories { get; set;}
         public DbSet<BrentOilHistory> brentOilHistories { get; set;}
-        public DbSet<CopperHistory> copperHistories { get; set;}
         public DbSet<CopperUkHistory> copperUkHistories { get; set;}
         public DbSet<CrudeOilWTIHistory> crudeOilWTIs { get; set;}
         public DbSet<FeederCattleHistory> feederCattleHistories { get; set;}
