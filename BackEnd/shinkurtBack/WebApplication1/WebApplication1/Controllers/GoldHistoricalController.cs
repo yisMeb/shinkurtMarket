@@ -49,10 +49,8 @@ namespace WebApplication1.Controllers
                 {
                     GoldHistory pcomm = new GoldHistory();
                     HtmlNodeCollection cells = obj.SelectNodes("td");
-                    if (DateOnly.TryParse(cells[0].InnerText, out DateOnly time))
-                    {
-                        p[k].Date = time;
-                    }
+                    
+                    p[k].Date = cells[0].InnerText;
                     p[k].Price = cells[1].InnerText;
                     p[k].Open = cells[2].InnerText;
                     p[k].High = cells[3].InnerText;

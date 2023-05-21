@@ -27,17 +27,6 @@ namespace WebApplication1.Data
 
             base.OnModelCreating(modelBuilder);
         }
-
-        protected override void ConfigureConventions(ModelConfigurationBuilder builder)
-        {
-
-            builder.Properties<DateOnly>()
-                .HaveConversion<ConvertDate>()
-                .HaveColumnType("date");
-            base.ConfigureConventions(builder);
-
-        }
-
         public DbSet<GoldHistory> GoldHistories { get; set; }
         public DbSet<PriceCommodities> PriceCommodity { get; set;}
         public DbSet<AluminiumHistory> aluminiumHistories { get; set;}

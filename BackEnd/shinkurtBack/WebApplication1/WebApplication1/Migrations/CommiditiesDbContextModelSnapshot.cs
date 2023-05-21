@@ -30,8 +30,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("al_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -43,7 +43,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -65,8 +64,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("brt_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -78,7 +77,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -94,14 +92,8 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Model.Commodities.CopperHistory", b =>
                 {
-                    b.Property<int>("co_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("co_Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -113,7 +105,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -122,7 +113,7 @@ namespace WebApplication1.Migrations
                     b.Property<string>("changePercentage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("co_Id");
+                    b.HasKey("Date");
 
                     b.ToTable("copperHistories");
                 });
@@ -135,8 +126,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cuk_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -148,7 +139,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -170,8 +160,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("crd_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -183,7 +173,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -205,8 +194,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("fd_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -218,7 +207,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -240,8 +228,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("gasoline_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -253,7 +241,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -275,8 +262,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("g_id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -288,7 +275,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -310,8 +296,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cattle_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -323,7 +309,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -345,8 +330,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("lcoffee_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -358,7 +343,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -380,8 +364,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("lumber_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -393,7 +377,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -415,8 +398,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ngas_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -428,7 +411,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -450,8 +432,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("oat_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -463,7 +445,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -485,8 +466,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orange_d"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -498,7 +479,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -555,8 +535,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("slv_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -568,7 +548,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -590,8 +569,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("uscorn_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -603,7 +582,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -625,8 +603,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("usw_Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -638,7 +616,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -660,8 +637,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("xagId"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -673,7 +650,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")
@@ -695,8 +671,8 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ZId"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("High")
                         .HasColumnType("nvarchar(max)");
@@ -708,7 +684,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Volume")

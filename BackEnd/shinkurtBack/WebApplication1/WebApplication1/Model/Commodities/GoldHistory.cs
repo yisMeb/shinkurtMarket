@@ -6,10 +6,9 @@ namespace WebApplication1.Model.Commodities
     public class GoldHistory
     {
         [Key]
-        public int g_id { get; set; }   
-        [Required]
-        public DateOnly Date { get; set; }
-        public string Price { get; set; }
+        public int g_id { get; set; }
+        public string? Date { get; set; }
+        public string? Price { get; set; }
         public string? Open { get; set; }
         public string? High { get; set; }
         public string? Low { get; set; }

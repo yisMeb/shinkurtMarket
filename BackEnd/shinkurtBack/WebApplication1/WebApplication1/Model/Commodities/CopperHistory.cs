@@ -6,10 +6,8 @@ namespace WebApplication1.Model.Commodities
     public class CopperHistory
     {
         [Key]
-        public int co_Id { get; set; }
-        [Required]
-        public DateOnly Date { get; set; }
-        public string Price { get; set; }
+        public string? Date { get; set; }
+        public string? Price { get; set; }
         public string? Open { get; set; }
         public string? High { get; set; }
         public string? Low { get; set; }

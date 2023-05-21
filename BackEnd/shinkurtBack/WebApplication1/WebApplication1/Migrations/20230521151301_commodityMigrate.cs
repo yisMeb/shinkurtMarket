@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class commodities : Migration
+    public partial class commodityMigrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +16,8 @@ namespace WebApplication1.Migrations
                 {
                     al_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -36,8 +35,8 @@ namespace WebApplication1.Migrations
                 {
                     brt_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -53,10 +52,8 @@ namespace WebApplication1.Migrations
                 name: "copperHistories",
                 columns: table => new
                 {
-                    co_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -65,7 +62,7 @@ namespace WebApplication1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_copperHistories", x => x.co_Id);
+                    table.PrimaryKey("PK_copperHistories", x => x.Date);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,8 +71,8 @@ namespace WebApplication1.Migrations
                 {
                     cuk_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -93,8 +90,8 @@ namespace WebApplication1.Migrations
                 {
                     crd_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -112,8 +109,8 @@ namespace WebApplication1.Migrations
                 {
                     fd_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -131,8 +128,8 @@ namespace WebApplication1.Migrations
                 {
                     gasoline_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -150,8 +147,8 @@ namespace WebApplication1.Migrations
                 {
                     g_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -169,8 +166,8 @@ namespace WebApplication1.Migrations
                 {
                     cattle_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -188,8 +185,8 @@ namespace WebApplication1.Migrations
                 {
                     lcoffee_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -207,8 +204,8 @@ namespace WebApplication1.Migrations
                 {
                     lumber_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -226,8 +223,8 @@ namespace WebApplication1.Migrations
                 {
                     ngas_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -245,8 +242,8 @@ namespace WebApplication1.Migrations
                 {
                     oat_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -264,8 +261,8 @@ namespace WebApplication1.Migrations
                 {
                     orange_d = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -302,8 +299,8 @@ namespace WebApplication1.Migrations
                 {
                     slv_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -321,8 +318,8 @@ namespace WebApplication1.Migrations
                 {
                     uscorn_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -340,8 +337,8 @@ namespace WebApplication1.Migrations
                 {
                     usw_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -359,8 +356,8 @@ namespace WebApplication1.Migrations
                 {
                     xagId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -378,8 +375,8 @@ namespace WebApplication1.Migrations
                 {
                     ZId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Open = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     High = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Low = table.Column<string>(type: "nvarchar(max)", nullable: true),
