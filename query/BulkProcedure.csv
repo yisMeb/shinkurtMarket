@@ -1,0 +1,36 @@
+CREATE PROCEDURE BulkInsertData
+AS
+BEGIN
+    DECLARE @TableName NVARCHAR(100);
+    DECLARE @CSVFilePath NVARCHAR(1000);
+    DECLARE @SQL NVARCHAR(MAX);
+
+    -- Cursor to loop through the tables
+    DECLARE TableCursor CURSOR FOR
+    SELECT
+        t.name AS TableName,
+        'C:\Users\asus\Downloads\gituploads\shinkurtMarket\query\datas\' + t.name + '.csv' AS CSVFilePath
+    FROM
+        sys.tables AS t
+    WHERE
+        t.name IN ('aluminiumHistories', 'brentOilHistories', 'copperUkHistories', 'crudeOilWTIs', 'feederCattleHistories', 'gasolineHistories', 'GoldHistories', 'liveCattleHistories', 'londonCoffes', 'lumberHistories', 'naturalGasHistories', 'oatsHistories', 'orangeJuiceHistories', 'silverHistories', 'usCornHistories', 'usWheatHistories', 'xAG_USD_s', 'zincHistories');
+
+    OPEN TableCursor;
+
+    -- Fetch the first row
+    FETCH NEXT FROM TableCursor INTO @TableName, @CSVFilePath;
+
+    -- Loop through each table and perform bulk insert
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        SET @SQL = 'BULK INSERT dbo.' + QUOTENAME(@TableName) + ' FROM ''' + @CSVFilePath + ''' WITH (FIRSTROW = 1, FIELDTERMINATOR = '','', ROWTERMINATOR = ''\n'', BATCHSIZE = 25000, MAXERRORS = 2);';
+
+        EXEC sp_executesql @SQL;
+
+        -- Fetch the next row
+        FETCH NEXT FROM TableCursor INTO @TableName, @CSVFilePath;
+    END;
+
+    CLOSE TableCursor;
+    DEALLOCATE TableCursor;
+END;
