@@ -34,3 +34,6 @@ BEGIN
     CLOSE TableCursor;
     DEALLOCATE TableCursor;
 END;
+
+EXEC dbo.BulkInsertData
+

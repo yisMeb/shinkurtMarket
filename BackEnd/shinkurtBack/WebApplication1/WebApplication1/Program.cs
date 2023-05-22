@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<CommiditiesDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
+builder.Services.AddDbContext<CreadientialDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
 
 var provider= builder.Services.BuildServiceProvider();
 var configuration=provider.GetService<IConfiguration>();

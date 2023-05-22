@@ -19,6 +19,7 @@ namespace WebApplication1.Controllers
         {
             _dbContext = dbContext;
         }
+
         [Route("GetGoldHistoryDate")]
         [AcceptVerbs("GET")]
         public async Task<ActionResult<IEnumerable<DateOnly>>> GetGoldHistoryDate()

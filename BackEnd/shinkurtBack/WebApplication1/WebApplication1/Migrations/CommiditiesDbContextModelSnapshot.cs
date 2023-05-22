@@ -90,34 +90,6 @@ namespace WebApplication1.Migrations
                     b.ToTable("brentOilHistories");
                 });
 
-            modelBuilder.Entity("WebApplication1.Model.Commodities.CopperHistory", b =>
-                {
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("High")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Low")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Open")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Price")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Volume")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("changePercentage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Date");
-
-                    b.ToTable("copperHistories");
-                });
-
             modelBuilder.Entity("WebApplication1.Model.Commodities.CopperUkHistory", b =>
                 {
                     b.Property<int>("cuk_Id")
@@ -520,6 +492,9 @@ namespace WebApplication1.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Time")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");

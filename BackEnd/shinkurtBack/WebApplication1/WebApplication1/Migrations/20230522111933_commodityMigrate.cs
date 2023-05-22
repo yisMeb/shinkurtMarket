@@ -47,8 +47,8 @@ namespace WebApplication1.Migrations
                 {
                     table.PrimaryKey("PK_brentOilHistories", x => x.brt_Id);
                 });
-             
-               migrationBuilder.CreateTable(
+
+            migrationBuilder.CreateTable(
                 name: "copperUkHistories",
                 columns: table => new
                 {
@@ -269,7 +269,8 @@ namespace WebApplication1.Migrations
                     High = table.Column<double>(type: "float", nullable: true),
                     Low = table.Column<double>(type: "float", nullable: true),
                     Change = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ChangePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ChangePercentage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Time = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -380,9 +381,6 @@ namespace WebApplication1.Migrations
 
             migrationBuilder.DropTable(
                 name: "brentOilHistories");
-
-            migrationBuilder.DropTable(
-                name: "copperHistories");
 
             migrationBuilder.DropTable(
                 name: "copperUkHistories");

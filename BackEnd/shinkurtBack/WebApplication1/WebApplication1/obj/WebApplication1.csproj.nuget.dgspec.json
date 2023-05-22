@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[1.11.46, )"
             },
+            "IdentityServer3": {
+              "target": "Package",
+              "version": "[2.6.3, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.4, )"
@@ -71,6 +75,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "ZXing.Net": {
+              "target": "Package",
+              "version": "[0.16.9, )"
             }
           },
           "imports": [

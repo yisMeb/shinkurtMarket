@@ -24,9 +24,16 @@ namespace WebApplication1.Data
                 // Set key for entity
                 entity.HasKey(p => p.id);
             });
+         modelBuilder.Entity<PriceCommodities>()
+        .Property(p => p.Time)
+        .HasConversion(
+            time => time.Value.ToString(),  // Convert TimeOnly? to string
+            str => TimeOnly.Parse(str)      // Convert string back to TimeOnly?
+        );
 
             base.OnModelCreating(modelBuilder);
         }
+
         public DbSet<GoldHistory> GoldHistories { get; set; }
         public DbSet<PriceCommodities> PriceCommodity { get; set;}
         public DbSet<AluminiumHistory> aluminiumHistories { get; set;}

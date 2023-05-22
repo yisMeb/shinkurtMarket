@@ -16,7 +16,6 @@ namespace WebApplication1.Model.Commodities
         public string? Change { get; set; }
         [Display(Name = "Change %")]
         public string? ChangePercentage { get; set; }
-        [NotMapped]
         public TimeOnly? Time { get; set; }
 
     }

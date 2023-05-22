@@ -69,7 +69,7 @@ namespace WebApplication1.Controllers
                           p[k].Time = null;
                         }
                         commodities.Add(p[k]);
-                       k++;
+                      k++;
                     }
                      
                 }
