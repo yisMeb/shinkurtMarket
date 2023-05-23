@@ -18,7 +18,7 @@ builder.Services.AddDbContext<CreadientialDbContext>(options =>
 
 var provider= builder.Services.BuildServiceProvider();
 var configuration=provider.GetService<IConfiguration>();
-/*
+
 builder.Services.AddCors(options =>
 {
 
@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
     });
 
 });
-*/
+
 
 var app = builder.Build();
 
@@ -43,7 +43,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseCors();
+app.UseCors();
 
 app.UseRouting();
 

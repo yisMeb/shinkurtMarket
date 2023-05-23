@@ -20,7 +20,7 @@ function Footer() {
        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
        <h5 className="text-uppercase mb-4 font-weight-bold"> Shinkurt</h5>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, culpa corrupti. Provident eos odit asperiores ipsa molestias!
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, culpa corrupti. Provident eos odit asperiores ipsa molestias!
             </p>
        </div>
        <hr className="w-100 clearfix d-md-none"/>
@@ -52,30 +52,30 @@ function Footer() {
             <Link to="#" className='text-decoration-none'>News</Link>
             </p>
           </div>
-        <hr class="w-100 clearfix d-md-none" /> 
-         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h5 class="text-uppercase mb-4 font-weight-bold">Contact</h5>
-            <p><i class="mr-3"> <FaHome/> </i> Addis Ababa, Ethiopia</p>
-             <p><i class="mr-3"> <AiOutlineMail/></i> info@gmail.com</p>
-            <p><i class="mr-3"> <AiFillPhone/> </i> +1121822548</p>
-            <p><i class="mr-3"> <FaMobile/> </i> +251 9452859</p>
+        <hr className="w-100 clearfix d-md-none" /> 
+         <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h5 className="text-uppercase mb-4 font-weight-bold">Contact</h5>
+            <p><i className="mr-3"> <FaHome/> </i> Addis Ababa, Ethiopia</p>
+             <p><i className="mr-3"> <AiOutlineMail/></i> info@gmail.com</p>
+            <p><i className="mr-3"> <AiFillPhone/> </i> +1121822548</p>
+            <p><i className="mr-3"> <FaMobile/> </i> +251 9452859</p>
         </div>
        </div>
        </section>
-       <hr class="my-3"/>
-       <section class="p-3 pt-0">
-        <div class="row d-flex align-items-center">
-        <div class="col-md-7 col-lg-8 text-center text-md-start">
-        <div class="p-3">
+       <hr className="my-3"/>
+       <section className="p-3 pt-0">
+        <div className="row d-flex align-items-center">
+        <div className="col-md-7 col-lg-8 text-center text-md-start">
+        <div className="p-3">
         © 2023 Copyright:
               <Link to='/home'>shinkurt.com</Link>
              </div>
             </div>
-            <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-            <Link to='https://www.facebook.com/' class="btn btn-outline-primary btn-floating m-1" role="button"><BsFacebook size={25}/> </Link>
-            <Link to='https://www.instagram.com/' class="btn btn-outline-primary btn-floating m-1" role="button"><AiFillInstagram size={25}/> </Link>
-            <Link to='https://www.telegram.com/' class="btn btn-outline-primary btn-floating m-1" role="button"><BsTelegram size={25}/> </Link>
-            <Link to='https://www.twitter.com/' class="btn btn-outline-primary btn-floating m-1" role="button"><BsTwitter size={25}/> </Link>
+            <div className="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+            <Link to='https://www.facebook.com/' className="btn btn-outline-primary btn-floating m-1" role="button"><BsFacebook size={25}/> </Link>
+            <Link to='https://www.instagram.com/' className="btn btn-outline-primary btn-floating m-1" role="button"><AiFillInstagram size={25}/> </Link>
+            <Link to='https://www.telegram.com/' className="btn btn-outline-primary btn-floating m-1" role="button"><BsTelegram size={25}/> </Link>
+            <Link to='https://www.twitter.com/' className="btn btn-outline-primary btn-floating m-1" role="button"><BsTwitter size={25}/> </Link>
               </div>
               </div>
       </section>
