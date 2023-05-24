@@ -117,7 +117,6 @@ function Home() {
             </ol>
           </div>
         </div>
-
         {/* Creating our Tables below */}
         <div className="container">
           <div className="mt-3">
