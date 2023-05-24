@@ -1,6 +1,4 @@
-﻿using IdentityServer3.Core.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
 using WebApplication1.Model.User;
  
 namespace WebApplication1.Repo

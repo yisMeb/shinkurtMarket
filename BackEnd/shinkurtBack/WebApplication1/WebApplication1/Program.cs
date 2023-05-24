@@ -1,6 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
-using WebApplication1.Model;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +20,18 @@ builder.Services.AddDbContext<CreadientialDbContext>(options =>
 var provider= builder.Services.BuildServiceProvider();
 var configuration=provider.GetService<IConfiguration>();
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(config =>
+{
+    config.Password.RequiredLength = 3;
+    config.Password.RequireDigit = false;
+    config.Password.RequireNonAlphanumeric = false;
+    config.Password.RequireUppercase = false;
+
+})
+        .AddEntityFrameworkStores<CreadientialDbContext>();
+
 builder.Services.AddCors(options =>
 {
-
     var frontendUrl = configuration.GetValue<string>("frontend_url");
 
     options.AddDefaultPolicy(builder =>

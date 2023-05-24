@@ -5,13 +5,13 @@ namespace WebApplication1.Model.User
 {
     public class Login
     {
-        
-        [Required(ErrorMessage = "Please enter your UserName")]
-        public string UserName { get; set; }
-        [Required(ErrorMessage = "Please enter your Password")]
+        [Required, EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
-        [ForeignKey("User")]
-        public int UId { get; set; }
-        public User User { get; set; }
+        [Display(Name = "Remember Me")]
+        public bool RememberMe { get; set; } = false;
     }
 }
+

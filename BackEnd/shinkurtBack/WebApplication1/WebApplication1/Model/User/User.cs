@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using Microsoft.AspNetCore.Identity;
 namespace WebApplication1.Model.User
 {
     public class User
     {
-        [Key]
-       public int UId { get; set; }
-        [Required(ErrorMessage = "Please Enter your Email")]
+        [Required(ErrorMessage = "Please Enter your username")]
         [Display(Name = "User Name")]
        public string UserName { get; set; }
+        [Key]
         [Required(ErrorMessage = "Please Enter your Email")]
         [Display(Name = "Email Address")]
         [EmailAddress(ErrorMessage = "Please Enter Valid Email")]
