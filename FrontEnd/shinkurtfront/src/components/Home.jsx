@@ -4,20 +4,26 @@ import { BiTimeFive } from 'react-icons/bi';
 import { AiFillStar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useTable } from 'react-table';
+import { TiArrowSortedUp } from 'react-icons/ti';
+import { AiFillCaretDown } from 'react-icons/ai';
+import '../index.css'
 
 function Home() {
   const [commodity, setCommodity] = useState([]);
   const [previousValues, setPreviousValues] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:44372/api/ScrappingPrice/GetScrappName');
-        
+        const response = await axios.get(
+          'https://localhost:44372/api/ScrappingPrice/GetScrappName'
+        );
+
         // Parse string values to float
-        const parsedData = response.data.map(item => ({...item,
+        const parsedData = response.data.map((item) => ({
+          ...item,
           last: parseFloat(item.last),
           low: parseFloat(item.low),
           high: parseFloat(item.high),
@@ -39,7 +45,6 @@ function Home() {
     setPreviousValues(commodity);
   }, [commodity]);
 
-  
   useEffect(() => {
     if (highlightedIndex !== null) {
       const timeout = setTimeout(() => {
@@ -52,7 +57,9 @@ function Home() {
 
   useEffect(() => {
     commodity.forEach((user, index) => {
-      const previousValue = previousValues[index] ? previousValues[index].last : null;
+      const previousValue = previousValues[index]
+        ? previousValues[index].last
+        : null;
       const currentValue = user.last;
 
       if (previousValue !== null && previousValue > currentValue) {
@@ -61,6 +68,7 @@ function Home() {
     });
   }, [commodity, previousValues]);
 
+  const displayedCommodity = showAll ? commodity : commodity.slice(0, 10);
 
   return (
     <>
@@ -114,42 +122,76 @@ function Home() {
         <div className="container">
           <div className="mt-3">
             <h3>List of Commodities</h3>
-            <table className="table">
+            <table className="table table-striped">
               <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Month</th>
-                  <th>Last</th>
-                  <th>High</th>
-                  <th>Low</th>
-                  <th>Change</th>
-                  <th>Change %</th>
-                  <th>Time</th>
+                <tr> 
+                  <th scope='col'>#</th>
+                  <th scope='col' className="name-column">Name</th>
+                  <th scope='col'>Month</th>
+                  <th scope='col'>Last</th>
+                  <th scope='col'>High</th>
+                  <th scope='col'>Low</th>
+                  <th scope='col'>Change</th>
+                  <th scope='col'>Change %</th>
+                  <th scope='col'>Time</th>
                 </tr>
               </thead>
-              <tbody>
-                {commodity.map((user, index) => {
-                   const isHighlighted = highlightedIndex === index;
-                   const color = isHighlighted ? 'red' : '';
-                  const chngVal=user.change
-                  const chngvalPer=user.changePercentage
-                  const chngColor=chngVal.includes("+") ? 'green' :'red'
-                  const chngPerCol=chngvalPer.includes("+") ? 'green' : 'red'
+              <tbody className='hvrChnage'>
+                {displayedCommodity.map((user, index) => {
+                  const isHighlighted = highlightedIndex === index;
+                  const color = isHighlighted ? 'lightgreen' : '';
+                  const chngVal = user.change;
+                  const chngvalPer = user.changePercentage;
+                  const chngColor = chngVal.includes('+') ? 'green' : 'red';
+                  const chngPerCol = chngvalPer.includes('+') ? 'green' : 'red';
+                  const rowNumber = index + 1;
+                  const stik =
+                    chngColor == 'green' ? (
+                      <TiArrowSortedUp />
+                    ) : (
+                      <AiFillCaretDown />
+                    );
+                  const stikper =
+                    chngPerCol == 'green' ? (
+                      <TiArrowSortedUp />
+                    ) : (
+                      <AiFillCaretDown />
+                    );
                   return (
                     <tr key={index}>
-                      <td>{user.name}</td>
+                      <td className="name-column">{rowNumber}</td>                      
+                      <td className="name-column">{user.name}</td>
                       <td>{user.month}</td>
-                      <td style={{backgroundColor: color }}>{user.last}</td>
+                      <td style={{ backgroundColor: color }}>{user.last}</td>
                       <td>{user.high}</td>
                       <td>{user.low}</td>
-                      <td style={{color: chngColor}}>{user.change}</td>
-                      <td  style={{color: chngPerCol}}>{user.changePercentage}</td>
+                      <td style={{ color: chngColor }}>
+                        {stik} {user.change}
+                      </td>
+                      <td style={{ color: chngPerCol }}>
+                        {stikper}
+                        {user.changePercentage}
+                      </td>
                       <td>{user.time}</td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
+            {!showAll && (
+              <div className="text-left mb-1">
+                <button className="btn btn-primary" onClick={() => setShowAll(true)}>
+                  Show All
+                </button>
+              </div>
+            )}
+            {showAll && (
+              <div className="text-left mb-1">
+                <button className="btn btn-primary" onClick={() => setShowAll(false)}>
+                  Show Less
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

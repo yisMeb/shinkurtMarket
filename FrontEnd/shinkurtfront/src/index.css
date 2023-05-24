@@ -11,3 +11,22 @@ body{
 .content-margin-overlap{
     margin-top: 120px;
 }
+.name-column {
+    border-right: 1px solid #ddd; 
+  }
+  
+  th.name-column {
+    position: relative; 
+  }
+  
+  th.name-column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -1px;
+    border-left: 1px solid #ddd; 
+  }
+  .hvrChnage :hover{
+    background-color: #9c9c9c;
+  }
