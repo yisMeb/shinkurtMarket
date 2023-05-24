@@ -12,30 +12,55 @@ function Home() {
   const [highlightedIndex, setHighlightedIndex] = useState(null);
 
   useEffect(() => {
-    // Function to fetch data from the API
     const fetchData = async () => {
       try {
         const response = await axios.get('https://localhost:44372/api/ScrappingPrice/GetScrappName');
-        console.log(response.data);
-        setCommodity(response.data);
+        
+        // Parse string values to float
+        const parsedData = response.data.map(item => ({...item,
+          last: parseFloat(item.last),
+          low: parseFloat(item.low),
+          high: parseFloat(item.high),
+        }));
+
+        setCommodity(parsedData);
       } catch (err) {
         console.log(err);
       }
     };
+
     fetchData();
-    setPreviousValues(commodity);
-    const interval = setInterval(fetchData, 10000);//evert 10 second
+
+    const interval = setInterval(fetchData, 1000);
     return () => clearInterval(interval);
-  },[], [commodity]);
+  }, []);
 
   useEffect(() => {
+    setPreviousValues(commodity);
+  }, [commodity]);
+
+  
+  useEffect(() => {
     if (highlightedIndex !== null) {
-      const timer = setTimeout(() => {
+      const timeout = setTimeout(() => {
         setHighlightedIndex(null);
       }, 1000);
-      return () => clearTimeout(timer);
+
+      return () => clearTimeout(timeout);
     }
   }, [highlightedIndex]);
+
+  useEffect(() => {
+    commodity.forEach((user, index) => {
+      const previousValue = previousValues[index] ? previousValues[index].last : null;
+      const currentValue = user.last;
+
+      if (previousValue !== null && previousValue > currentValue) {
+        setHighlightedIndex(index);
+      }
+    });
+  }, [commodity, previousValues]);
+
 
   return (
     <>
@@ -104,18 +129,21 @@ function Home() {
               </thead>
               <tbody>
                 {commodity.map((user, index) => {
-                    
+                   const isHighlighted = highlightedIndex === index;
+                   const color = isHighlighted ? 'red' : '';
+                  const chngVal=user.change
+                  const chngvalPer=user.changePercentage
+                  const chngColor=chngVal.includes("+") ? 'green' :'red'
+                  const chngPerCol=chngvalPer.includes("+") ? 'green' : 'red'
                   return (
                     <tr key={index}>
                       <td>{user.name}</td>
                       <td>{user.month}</td>
-                      <td >
-                        {user.last}
-                      </td>
+                      <td style={{backgroundColor: color }}>{user.last}</td>
                       <td>{user.high}</td>
                       <td>{user.low}</td>
-                      <td>{user.change}</td>
-                      <td>{user.changePercentage}</td>
+                      <td style={{color: chngColor}}>{user.change}</td>
+                      <td  style={{color: chngPerCol}}>{user.changePercentage}</td>
                       <td>{user.time}</td>
                     </tr>
                   );
