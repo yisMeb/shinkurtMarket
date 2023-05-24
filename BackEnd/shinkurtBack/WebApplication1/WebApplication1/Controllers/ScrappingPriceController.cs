@@ -13,8 +13,6 @@ using static Azure.Core.HttpHeader;
 
 namespace WebApplication1.Controllers
 {
-
-
     [Route("api/[controller]")]
     [ApiController]
     public class ScrappingPriceController : ControllerBase
