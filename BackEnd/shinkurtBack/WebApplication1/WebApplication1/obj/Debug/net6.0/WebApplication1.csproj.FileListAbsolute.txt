@@ -178,3 +178,7 @@ C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplic
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net6.0\IdentityServer3.dll
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net6.0\Owin.dll
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net6.0\zxing.dll
+C:\Users\Wongel Dawit\Desktop\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net6.0\CsvHelper.dll
+C:\Users\Wongel Dawit\Desktop\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net6.0\IdentityServer3.dll
+C:\Users\Wongel Dawit\Desktop\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net6.0\Owin.dll
+C:\Users\Wongel Dawit\Desktop\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net6.0\zxing.dll

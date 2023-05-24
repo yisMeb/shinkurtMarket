@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Data;
 using WebApplication1.Model.User;
 using WebApplication1.Repo;
 
@@ -7,51 +8,69 @@ namespace WebApplication1.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserRepository iuserrepository;
+        private readonly SignInManager<IdentityUser> signInManager;
+        public readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<User> _signInManager;
-
-        public AccountController(IUserRepository iuserrepository, SignInManager<User> signInManager)
+        private readonly CreadientialDbContext _dbContext;
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, CreadientialDbContext dbContext)
         {
-            this.iuserrepository = iuserrepository;
-            _signInManager = signInManager;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            _dbContext = dbContext;
         }
       
-        [HttpPost]
+       // [HttpPost]
+        [Route("SignUp")]
+        [AcceptVerbs("POST")]
         public async Task<IActionResult> SignUp(User signupModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var user = await userManager.FindByEmailAsync(signupModel.Email);
+            if (user != null)
             {
-                var result = await iuserrepository.CreateUser(signupModel);
-                if (!result.Succeeded)
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                    return View(signupModel);
-                }
-                ModelState.Clear();
+                TempData["Error"] = "This Email Address is already in Use";
+                return BadRequest(ModelState);
             }
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Login(Login loginModel)
-        {  
-            if (ModelState.IsValid)
+            var newUser = new IdentityUser
             {
-                    var result = await _signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
+                UserName = signupModel.Email,
+                Email = signupModel.Email
+            };
+            var result = await userManager.CreateAsync(newUser, signupModel.Password);
+            if (result.Succeeded)
+                //return RedirectToAction("Index", "Home");
+                return Ok("Logged in successfully!");
+            return BadRequest(ModelState);
 
+        }
+       // [HttpPost]
+        [Route("Login")]
+        [AcceptVerbs("POST")]
+        public async Task<IActionResult> Login(Login loginModel)
+        {
+            string returnUrl = HttpContext.Request.Query["returnUrl"];
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await userManager.FindByEmailAsync(loginModel.Email);
+            if (user != null)
+            {
+                var passwordCheck = await userManager.CheckPasswordAsync(user, loginModel.Password);
+                if (passwordCheck)
+                {
+                    var result = await signInManager.PasswordSignInAsync(user, loginModel.Password, loginModel.RememberMe, false);
                     if (result.Succeeded)
                     {
                         return Ok("Logged in successfully!");
                     }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    }
-              }
-
-         return BadRequest(ModelState);
+                }
+                TempData["Message"] = "Wrong Credential, Please, try again";
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
+            TempData["Message"] = "Wrong Credential, Please, try again";
+            return BadRequest(ModelState);
+          
         }
     }
     
