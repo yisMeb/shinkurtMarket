@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Net.Http.Headers;
 using System;
@@ -43,7 +44,11 @@ namespace WebApplication1.Controllers
                    PriceCommodities[] p = new PriceCommodities[rows.Count];
                    priceCommodities = await _dbContext.PriceCommodity.ToListAsync();
                    _dbContext.PriceCommodity.RemoveRange(priceCommodities);
-                    
+                 //reset our Id to start from 1
+                string tableName = "PriceCommodity";  
+                string resetQuery = $"DBCC CHECKIDENT ('{tableName}', RESEED, 0);";
+                _dbContext.Database.ExecuteSqlRaw(resetQuery);
+
                 for (int j = 0; j < rows.Count; j++)
                     {
                         p[j] = new PriceCommodities(); // Initialize each element of the array
