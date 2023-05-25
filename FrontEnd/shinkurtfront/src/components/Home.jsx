@@ -19,6 +19,7 @@ function Home() {
   const [csvData, setCsvData] = useState([]);
   const [csvDataCrypto, setCsvDataCrypto] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchQueryCrypto, setSearchQueryCrypto] = useState('');
   const [dCommodity, setDCommodity] = useState([]);
   const [dcrypto, setDCrypto] = useState([]);
   const [crypto, setCrypto] = useState([]);
@@ -97,20 +98,23 @@ function Home() {
 
   useEffect(() => {
     const filteredCommodity = commodity.filter((user) =>user.name.toLowerCase().includes(searchQuery.toLowerCase()));
-    const filteredCrypto= crypto.filter((user)=>user.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredCrypto= crypto.filter((user)=>user.name.toLowerCase().includes(searchQueryCrypto.toLowerCase()));
     setDCommodity(filteredCommodity.slice(0, 10));
     setDCrypto(filteredCrypto.slice(0, 10));
-  }, [commodity, crypto, searchQuery]);
+  }, [commodity, crypto, searchQuery, searchQueryCrypto]);
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
+  };
+  const handleSearchCrypto = (event) => {
+    setSearchQueryCrypto(event.target.value);
   };
    
   const displayedCommodity = showAll ? commodity : commodity.slice(0, 10).filter((user) =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase())
     ); 
     const displayedCrypto = showAll ? crypto : crypto.slice(0, 10).filter((user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase())
+      user.name.toLowerCase().includes(searchQueryCrypto.toLowerCase())
     );
 
   return (
@@ -169,7 +173,7 @@ function Home() {
               type="text"
               className="form-control"
               placeholder="Search by name"
-              value={searchQuery}
+              value={searchQueryCrypto}
               onChange={handleSearch}
             />
           </div>
@@ -213,22 +217,7 @@ function Home() {
                   );
                 })}
               </tbody>
-            </table>
-            <div className='container d-flex justify-content-between'>
-            {!showAll && (
-              <div className="text-left mb-1">
-                <button className="btn btn-primary" onClick={() => setShowAll(true)}>
-                  Show All
-                </button>
-              </div>
-            )}
-            {showAll && (
-              <div className="text-left mb-1">
-                <button className="btn btn-secondary" onClick={() => setShowAll(false)}>
-                  Show Less
-                </button>
-              </div>
-            )}
+            </table>             
            {/* Download Button  crypto*/}
             <div className="text-left mb-3">
                {csvDataCrypto.length > 0 && (
@@ -237,7 +226,6 @@ function Home() {
               </CSVLink>
              )}
            </div>
-         </div> 
         </div>
         </div>
        {/* search */}
@@ -254,7 +242,7 @@ function Home() {
           </div>
         </div>           
 
-        {/* Creating our Tables below */}
+        {/* Creating our Tables commodity below */}
         <div className="container">
           <div className="mt-3">
             <table className="table table-striped">
