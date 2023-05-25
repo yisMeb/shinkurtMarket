@@ -2,6 +2,7 @@
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Formats.Asn1;
 using System.Globalization;
 using WebApplication1.Data;
@@ -85,10 +86,16 @@ namespace WebApplication1.Controllers
 
 
                     var date = Date?.InnerText.Trim();
+                    var d=Convert.ToDateTime(date).ToString("dd/MM/yyyy");
+
                     var price = Price?.InnerText.Trim();
+                   var p= price.Replace(",", "");
                     var open = Open?.InnerText.Trim();
+                   var o= open.Replace(",", "");
                     var high = High?.InnerText.Trim();
+                   var h= high.Replace(",", "");
                     var low = Low?.InnerText.Trim();
+                    var l=low.Replace(",", "");
                     var vol = Vol?.InnerText.Trim();
                     var chng = Chng?.InnerText.Trim();
          
@@ -96,11 +103,11 @@ namespace WebApplication1.Controllers
                     {
                         HData.Add(new GoldHistory
                         {
-                            Date = date,
-                            Price = price,
-                            Open = open,
-                            High=high,
-                            Low=low,
+                            Date = d,
+                            Price = p,
+                            Open = o,
+                            High=h,
+                            Low=l,
                             Volume=vol,
                             changePercentage=chng
                         });
