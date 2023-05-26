@@ -7,6 +7,8 @@ using WebApplication1.Model.Commodities;
 
 namespace WebApplication1.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CryptoController : Controller
     {
         private readonly cryptoDbContext _dbContext;
@@ -16,75 +18,57 @@ namespace WebApplication1.Controllers
         {
             _dbContext = dbContext;
             _httpClient = httpClientFactory.CreateClient();
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36");
         }
         ///Add
-        [Route("GetCryptoData")]
             [HttpGet]
-        public async Task<IActionResult> GetCryptoData()
-        {
-            try
+            public async Task<IEnumerable<crypto>> GetCryptoData()
             {
-                string url = "https://coinmarketcap.com/";
-                var response = await _httpClient.GetAsync(url);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    return StatusCode((int)response.StatusCode, "Failed to retrieve data from CoinMarketCap.");
-                }
+                var cryptoDataList = new List<crypto>();
                 List<crypto> cr = new List<crypto>();
                 cr = await _dbContext.crypt.ToListAsync();
-                _dbContext.crypt.RemoveRange(cr);
-                //reset our Id to start from 1
-                string tableName = "crypt";
-                string resetQuery = $"DBCC CHECKIDENT ('{tableName}', RESEED, 0);";
-                _dbContext.Database.ExecuteSqlRaw(resetQuery);
-                var content = await response.Content.ReadAsStringAsync();
-                 var htmlDocument = new HtmlDocument();
-                htmlDocument.LoadHtml(content);
+               _dbContext.crypt.RemoveRange(cr);
+            //reset our Id to start from 1
+            string tableName = "crypt";
+            string resetQuery = $"DBCC CHECKIDENT ('{tableName}', RESEED, 0);";
+            _dbContext.Database.ExecuteSqlRaw(resetQuery);
 
-                if (htmlDocument.DocumentNode == null)
-                {
-                    return StatusCode(500, "Failed to parse HTML content from CoinMarketCap.");
-                }
-                var cryptoList = new List<crypto>();
+            var url = "https://www.coingecko.com/";
 
-                var tableRows = htmlDocument.DocumentNode.SelectNodes("//table[contains(@class, 'cmc-table')]/tbody/tr")
-                    ?.Take(100);
-                Console.WriteLine($"Number of rows found: {tableRows?.Count()}");
+                var web = new HtmlWeb();
+                var doc = web.Load(url);
 
-                foreach (var row in tableRows)
+                var rows = doc.DocumentNode.SelectNodes("//tr");
+
+                foreach (var row in rows.Skip(1)) // Skip header row
                 {
                     var columns = row.SelectNodes("td");
-                    if (columns == null || columns.Count < 8) // Adjusted to check for at least 8 columns
-                    {
-                        continue; // Skip incomplete rows
-                    }
 
-                    var crypto = new crypto
+                    var n = columns[2].InnerText.Trim();
+                    var p = columns[3].InnerText.Trim();
+                    var one1hr = columns[4].InnerText.Trim();
+                    var day24hr = columns[5].InnerText.Trim();
+                    var vol = columns[7].InnerText.Trim();
+                    var mcap = columns[8].InnerText.Trim();
+                                         
+                    var cryptoData = new crypto
                     {
-                        name = columns[2].InnerText.Trim(),
-                        price = columns[3].InnerText.Trim(),
-                        hour = columns[4].InnerText.Trim(),
-                        day = columns[5].InnerText.Trim(),
-                        marketCap = columns[7].InnerText.Trim(),
-                        Volume = columns[8].InnerText.Trim()
+                         name=n,
+                         price=p,
+                         hour= one1hr,
+                         day= day24hr,
+                         marketCap=mcap,
+                         Volume=vol
                     };
 
-                    cryptoList.Add(crypto);
+                    cryptoDataList.Add(cryptoData);
                 }
-                foreach (crypto pc in cryptoList)
-                {
-                    await _dbContext.crypt.AddAsync(pc);
-                }
-                _dbContext.SaveChanges();
-                return Ok(cryptoList);
-            }
-            catch (Exception ex)
+            foreach (crypto pc in cryptoDataList)
             {
-                return StatusCode(500, $"An error occurred while scraping data: {ex.Message}");
+                await _dbContext.crypt.AddAsync(pc);
             }
-        }
+            await _dbContext.SaveChangesAsync();
+            return cryptoDataList;
+            }
         }
         /////
 }

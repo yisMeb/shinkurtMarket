@@ -16,6 +16,7 @@ function Home() {
   const [previousCrypto, setPreviousCrypto] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(null);
   const [showAll, setShowAll] = useState(false);
+  const [showAllCry, setShowAllCry] = useState(false);
   const [csvData, setCsvData] = useState([]);
   const [csvDataCrypto, setCsvDataCrypto] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,7 +29,7 @@ function Home() {
     const fetchCrypto = async () => {  
     try{
         const cres = await axios.get(
-          'https://localhost:44372/GetCryptoData'
+          'https://localhost:44372/api/Crypto'
         );
         const fetchedCrypto = cres.data; // Extract the data from the response
         setCrypto(fetchedCrypto);
@@ -113,7 +114,7 @@ function Home() {
   const displayedCommodity = showAll ? commodity : commodity.slice(0, 10).filter((user) =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase())
     ); 
-    const displayedCrypto = showAll ? crypto : crypto.slice(0, 10).filter((user) =>
+    const displayedCrypto = showAllCry ? crypto : crypto.slice(0, 10).filter((user) =>
       user.name.toLowerCase().includes(searchQueryCrypto.toLowerCase())
     );
 
@@ -174,7 +175,7 @@ function Home() {
               className="form-control"
               placeholder="Search by name"
               value={searchQueryCrypto}
-              onChange={handleSearch}
+              onChange={handleSearchCrypto}
             />
           </div>
         </div> 
@@ -198,19 +199,17 @@ function Home() {
                   const isHighlighted = highlightedIndex === index;
                   const color = isHighlighted ? 'green' : '';
                   const rowNumber = index + 1;
-                  const stiker =
-                    color == 'green' ? (
-                      <TiArrowSortedUp />
-                    ) : (
-                       ''
-                    );
+                  const hr = user.hour;
+                  const dd = user.day;
+                  const hrstiker = hr.includes('-') ? 'red' : 'green';
+                  const ddsticker= dd.includes('-') ? 'red' : 'green';
                   return (
                     <tr key={index}>
                       <td className="name-column">{rowNumber}</td>                      
                       <td className="name-column">{user.name}</td>
-                      <td>{user.price}</td>
-                      <td style={{ color: color }}>{user.hour}</td>
-                      <td style={{ color: color }}> {stiker} {user.day}</td>
+                      <td style={{ color: color }}>{user.price}</td>
+                      <td style={{ color: hrstiker }}>{user.hour}</td>
+                      <td style={{ color: ddsticker }}>{user.day}</td>
                       <td>{user.marketCap}</td>
                       <td >{user.volume}</td>
                     </tr>
@@ -219,12 +218,28 @@ function Home() {
               </tbody>
             </table>             
            {/* Download Button  crypto*/}
+           <div className='container d-flex justify-content-between'>
+           {!showAllCry && (
+              <div className="text-left mb-1">
+                <button className="btn btn-primary" onClick={() => setShowAllCry(true)}>
+                  Show All
+                </button>
+              </div>
+            )}
+            {showAllCry && (
+              <div className="text-left mb-1">
+                <button className="btn btn-secondary" onClick={() => setShowAllCry(false)}>
+                  Show Less
+                </button>
+              </div>
+            )}
             <div className="text-left mb-3">
                {csvDataCrypto.length > 0 && (
                <CSVLink data={csvDataCrypto} filename="top_Crypto_data.csv">
                  <button className="btn btn-outline-success">Download</button>
               </CSVLink>
              )}
+           </div>
            </div>
         </div>
         </div>
