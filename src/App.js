@@ -1,24 +1,37 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header';
-import Home from './components/Home';
-import Login from './components/Login';
-import Details from './components/Details';
-import Errror from './components/Errror';
-import {Routes,Route} from "react-router-dom"
+import React from 'react'
+import { Route,Routes } from 'react-router-dom'
+import Header from "./components/Header"
+import Home from "./components/Home"
+import About from './components/About'
+import Contact from './components/Contact'
+import Footer from "./components/Footer"
+import Forex from './components/Markets/Forex'
+import Crypto from './components/Markets/Crypto'
+import LocalMarket from './components/Markets/LocalMarket'
+import Signin from './components/Signin'
+import Signup from './components/Signup'
 
-function App() {
-  return (
-  <>
-    <Header />
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/details' element={<Details />} />
-      <Route path='*' element={<Errror />} />
-    </Routes>
-  </>
-  );
+function App(){
+    
+   
+   
+    return(
+        <>
+            <Header />
+            <div className='container'>
+                <Routes>
+                    <Route path='/' element={<Home/>}/>
+                    <Route path='/about' element={<About/>}/>
+                    <Route path='/contact' element={<Contact/>}/>
+                    <Route path='/forex' element={<Forex/>}/>
+                    <Route path='/crypto' element={<Crypto/>}/>
+                    <Route path='/localmarket' element={<LocalMarket/>}/>
+                    <Route path='/signin' element={<Signin/>}/>
+                    <Route path='/signup' element={<Signup/>}/>
+                </Routes>
+            </div>
+            <Footer />
+        </>
+    )
 }
-
-export default App;
+export default App
