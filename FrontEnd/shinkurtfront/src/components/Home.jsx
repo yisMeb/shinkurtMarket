@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { BsFire } from 'react-icons/bs';
-import { BiTimeFive } from 'react-icons/bi';
-import { AiFillStar } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { TiArrowSortedUp } from 'react-icons/ti';
-import { AiFillCaretDown } from 'react-icons/ai';
-import '../index.css'
+import React, { useEffect, useState } from "react";
+import { BsFire } from "react-icons/bs";
+import { BiTimeFive } from "react-icons/bi";
+import { AiFillStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { TiArrowSortedUp } from "react-icons/ti";
+import { AiFillCaretDown } from "react-icons/ai";
+import "../index.css";
 
 function Home() {
   const [commodity, setCommodity] = useState([]);
@@ -18,7 +18,7 @@ function Home() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'https://localhost:44372/api/ScrappingPrice/GetScrappName'
+          "https://localhost:44372/api/ScrappingPrice/GetScrappName"
         );
 
         // Parse string values to float
@@ -104,7 +104,7 @@ function Home() {
           </div>
           <div className="text-center shadow p-5">
             <span className="font-weight-bold">
-              <AiFillStar style={{ color: '#FCD611' }} />
+              <AiFillStar style={{ color: "#FCD611" }} />
               Articles
             </span>
             <ol>
@@ -123,42 +123,44 @@ function Home() {
             <h3>List of Commodities</h3>
             <table className="table table-striped">
               <thead>
-                <tr> 
-                  <th scope='col'>#</th>
-                  <th scope='col' className="name-column">Name</th>
-                  <th scope='col'>Month</th>
-                  <th scope='col'>Last</th>
-                  <th scope='col'>High</th>
-                  <th scope='col'>Low</th>
-                  <th scope='col'>Change</th>
-                  <th scope='col'>Change %</th>
-                  <th scope='col'>Time</th>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col" className="name-column">
+                    Name
+                  </th>
+                  <th scope="col">Month</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">High</th>
+                  <th scope="col">Low</th>
+                  <th scope="col">Change</th>
+                  <th scope="col">Change %</th>
+                  <th scope="col">Time</th>
                 </tr>
               </thead>
-              <tbody className='hvrChnage'>
+              <tbody className="hvrChnage">
                 {displayedCommodity.map((user, index) => {
                   const isHighlighted = highlightedIndex === index;
-                  const color = isHighlighted ? 'lightgreen' : '';
+                  const color = isHighlighted ? "lightgreen" : "";
                   const chngVal = user.change;
                   const chngvalPer = user.changePercentage;
-                  const chngColor = chngVal.includes('+') ? 'green' : 'red';
-                  const chngPerCol = chngvalPer.includes('+') ? 'green' : 'red';
+                  const chngColor = chngVal.includes("+") ? "green" : "red";
+                  const chngPerCol = chngvalPer.includes("+") ? "green" : "red";
                   const rowNumber = index + 1;
                   const stik =
-                    chngColor == 'green' ? (
+                    chngColor == "green" ? (
                       <TiArrowSortedUp />
                     ) : (
                       <AiFillCaretDown />
                     );
                   const stikper =
-                    chngPerCol == 'green' ? (
+                    chngPerCol == "green" ? (
                       <TiArrowSortedUp />
                     ) : (
                       <AiFillCaretDown />
                     );
                   return (
                     <tr key={index}>
-                      <td className="name-column">{rowNumber}</td>                      
+                      <td className="name-column">{rowNumber}</td>
                       <td className="name-column">{user.name}</td>
                       <td>{user.month}</td>
                       <td style={{ backgroundColor: color }}>{user.last}</td>
@@ -179,19 +181,24 @@ function Home() {
             </table>
             {!showAll && (
               <div className="text-left mb-1">
-                <button className="btn btn-primary" onClick={() => setShowAll(true)}>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => setShowAll(true)}
+                >
                   Show All
                 </button>
               </div>
             )}
             {showAll && (
               <div className="text-left mb-1">
-                <button className="btn btn-primary" onClick={() => setShowAll(false)}>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => setShowAll(false)}
+                >
                   Show Less
                 </button>
               </div>
             )}
-    
           </div>
         </div>
       </div>
