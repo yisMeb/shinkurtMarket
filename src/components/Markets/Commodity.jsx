@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LocalMarket() {
+function Commodity() {
   return (
     <div className='content-margin-overlap'>
        <h1>Shinkurt Market</h1>
@@ -8,4 +8,4 @@ function LocalMarket() {
   )
 }
 
-export default LocalMarket
+export default Commodity

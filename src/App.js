@@ -7,13 +7,12 @@ import Contact from './components/Contact'
 import Footer from "./components/Footer"
 import Forex from './components/Markets/Forex'
 import Crypto from './components/Markets/Crypto'
-import LocalMarket from './components/Markets/LocalMarket'
+import Commodity from './components/Markets/Commodity'
 import Signin from './components/Signin'
 import Signup from './components/Signup'
+import UserDashboard from './components/Dashbord/UserDashboard'
 
 function App(){
-    
-   
    
     return(
         <>
@@ -25,9 +24,11 @@ function App(){
                     <Route path='/contact' element={<Contact/>}/>
                     <Route path='/forex' element={<Forex/>}/>
                     <Route path='/crypto' element={<Crypto/>}/>
-                    <Route path='/localmarket' element={<LocalMarket/>}/>
+                    <Route path='/Commodity' element={<Commodity/>}/>
                     <Route path='/signin' element={<Signin/>}/>
                     <Route path='/signup' element={<Signup/>}/>
+                    <Route path='/dashboard' element={<UserDashboard/>}/>
+
                 </Routes>
             </div>
             <Footer />
