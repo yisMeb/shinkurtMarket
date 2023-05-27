@@ -1,7 +1,7 @@
 // Line.jsx
 
 import React from "react";
-import { ResponsiveLine } from "@nivo/line";
+import { ResponsiveLine, tooltip } from "@nivo/line";
 
 const Line = ({ data }) => {
   return (
@@ -20,8 +20,24 @@ const Line = ({ data }) => {
         curve="monotoneX"
         axisTop={null}
         axisRight={null}
-        axisBottom={null}
-        axisLeft={null}
+        axisBottom={{
+          orient: "bottom",
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Date",
+          legendOffset: 36,
+          legendPosition: "middle",
+        }}
+        axisLeft={{
+          orient: "left",
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Value",
+          legendOffset: -40,
+          legendPosition: "middle",
+        }}
         enableGridX={false}
         enableGridY={false}
         enablePoints={false}
@@ -32,6 +48,25 @@ const Line = ({ data }) => {
         animate={true}
         motionStiffness={90}
         motionDamping={15}
+        tooltip={(props) => {
+          const { point } = props;
+          return (
+            <div
+              style={{
+                background: "white",
+                padding: "9px 12px",
+                border: "1px solid #ccc",
+              }}
+            >
+              <div>
+                <strong>Date:</strong> {point.data.xFormatted}
+              </div>
+              <div>
+                <strong>Value:</strong> {point.data.yFormatted}
+              </div>
+            </div>
+          );
+        }}
       />
     </div>
   );

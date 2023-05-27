@@ -27,6 +27,37 @@ const Sidebar = () => {
   );
 };
 
+const ChartComponent = () => {
+  const [startDate, setStartDate] = useState([]);
+  const [endDate, setEndDate] = useState([]);
+
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+  };
+
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
+  };
+
+  // Rest of the component code...
+
+  return (
+    <div>
+      <label>
+        Start Date:
+        <input type="date" value={startDate} onChange={handleStartDateChange} />
+      </label>
+
+      <label>
+        End Date:
+        <input type="date" value={endDate} onChange={handleEndDateChange} />
+      </label>
+
+      {/* Render the chart using the selected date range */}
+    </div>
+  );
+};
+
 const UserDashboard = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -37,7 +68,7 @@ const UserDashboard = () => {
         );
         const parsedData = response.data.map((item) => ({
           g_id: parseFloat(item.g_id),
-          date: Date.parse(item.date),
+          date: item.date,
           price: parseFloat(item.price),
           open: parseFloat(item.open),
           high: parseFloat(item.high),
@@ -48,26 +79,50 @@ const UserDashboard = () => {
         }));
 
         setData(parsedData);
-        console.log(parsedData);
+        //console.log("hereeeeee");
       } catch (err) {
         console.log(err);
       }
     };
+    fetchData();
   }, []);
+  //filtering data to get sets of data we want to display
+  {
+    /*
+  const dateChangePercentageData2 = data
+    .filter(({ date }) => {
+      // Assuming Date is a string in the format 'YYYY-MM-DD'
+      if (startDate && endDate) {
+        return Date >= startDate && Date <= endDate;
+      }
+      if (startDate) {
+        return Date >= startDate;
+      }
+      if (endDate) {
+        return Date <= endDate;
+      }
+      return true; // No date filter applied
+    })
+    .map(({ Date, changePercentage }) => ({
+      x: Date,
+      y: changePercentage,
+    }));
 
-  const datePriceData = data.map(({ Date, Price }) => ({
-    x: Date,
-    y: Price,
+  console.log(dateChangePercentageData2);
+
+   */
+  }
+  const datePriceData = data.map(({ date, price }) => ({
+    x: date,
+    y: price,
   }));
+  console.log(datePriceData);
 
-  const dateChangePercentageData = data.map(({ Date, changePercentage }) => ({
-    x: Date,
+  const dateChangePercentageData = data.map(({ date, changePercentage }) => ({
+    x: date,
     y: changePercentage,
   }));
-
-  // <Line data={[{ id: "line", data: datePriceData }]} />
-  //  <Line data={[{ id: "line", data: dateChangePercentageData }]} />
-
+  //console.log(datePriceData);
   return (
     <div className="admin-dashboard">
       <Sidebar />
