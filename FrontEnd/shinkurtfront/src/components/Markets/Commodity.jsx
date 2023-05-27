@@ -2,9 +2,11 @@ import React from 'react'
 
 function Commodity() {
   return (
+    <Commodity>
     <div className='content-margin-overlap'>
-       <h1>Shinkurt Market</h1>
+       <h1>commodity</h1>
     </div>
+    </Commodity>
   )
 }
 

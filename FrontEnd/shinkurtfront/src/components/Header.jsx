@@ -11,7 +11,6 @@ function Header() {
         document.body.dataset.bsTheme=theme
        },[theme])
   return (
-    <header>
         <nav className={navtheme + " navbar fixed-top navbar-expand-lg border-bottom p-3 shadow-lg mb-5"}>
         <div className="container">
            <Link to='/' className="navbar-brand mb-0 h1 give-space-mr">
@@ -32,9 +31,8 @@ function Header() {
                   Catagory
                  </Link>
                  <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                    <li><Link to='/forex'className="dropdown-item">Forex</Link></li>
                     <li><Link to='/crypto'className="dropdown-item">crypto</Link></li>
-                    <li><Link to='/localmarket'className="dropdown-item">Local Markets</Link></li>
+                    <li><Link to='/commodity'className="dropdown-item">Commodities</Link></li>
                  </ul>
               </li>
               <li className="nav-item active">
@@ -74,7 +72,6 @@ function Header() {
       </div>
     </div>
     </nav> 
-  </header>
   )
 }
 export default Header

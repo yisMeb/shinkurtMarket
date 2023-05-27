@@ -24,7 +24,8 @@ function Home() {
   const [dCommodity, setDCommodity] = useState([]);
   const [dcrypto, setDCrypto] = useState([]);
   const [crypto, setCrypto] = useState([]);
-
+  const datetoday= new Date();
+  
   useEffect(()=>{
     const fetchCrypto = async () => {  
     try{
@@ -33,14 +34,14 @@ function Home() {
         );
         const fetchedCrypto = cres.data; // Extract the data from the response
         setCrypto(fetchedCrypto);
-        setCsvDataCrypto(fetchedCrypto);         
-      }catch(err){
+        setCsvDataCrypto(fetchedCrypto);
+       }catch(err){
         console.log(err)
       }
     };
     fetchCrypto();
     
-    const interval = setInterval(fetchCrypto, 1000);
+    const interval = setInterval(fetchCrypto, 10000);
     return () => clearInterval(interval);
    },[])
 
@@ -52,6 +53,7 @@ function Home() {
         );
 
         // Parse string values to float
+        
         const parsedData = response.data.map((item) => ({
           ...item,
           last: parseFloat(item.last),
@@ -65,7 +67,7 @@ function Home() {
       }
     };
     fetchData();
-    const interval = setInterval(fetchData, 1000);
+    const interval = setInterval(fetchData, 10000);
     return () => clearInterval(interval);
   }, []);
 
@@ -78,7 +80,7 @@ function Home() {
     if (highlightedIndex !== null) {
       const timeout = setTimeout(() => {
         setHighlightedIndex(null);
-      }, 1000);
+      }, 2000);
 
       return () => clearTimeout(timeout);
     }
@@ -165,7 +167,6 @@ function Home() {
             </ol>
           </div>
         </div>
-
         {/* crypto */}
         <div className="container mt-3">
         <h3>List Of Top Cryptos</h3>
@@ -206,7 +207,7 @@ function Home() {
                   return (
                     <tr key={index}>
                       <td className="name-column">{rowNumber}</td>                      
-                      <td className="name-column">{user.name}</td>
+                      <td className="name-column"> <Link to='/test' className='link-info text-decoration-none'> {user.name} </Link></td>
                       <td style={{ color: color }}>{user.price}</td>
                       <td style={{ color: hrstiker }}>{user.hour}</td>
                       <td style={{ color: ddsticker }}>{user.day}</td>
@@ -256,7 +257,6 @@ function Home() {
             />
           </div>
         </div>           
-
         {/* Creating our Tables commodity below */}
         <div className="container">
           <div className="mt-3">
@@ -298,10 +298,10 @@ function Home() {
                   return (
                     <tr key={index}>
                       <td className="name-column">{rowNumber}</td>                      
-                      <td className="name-column">{user.name}</td>
+                     <td className="name-column"><Link to='/test' className='link-info text-decoration-none'> {user.name} </Link></td>
                       <td>{user.month}</td>
                       <td style={{ backgroundColor: color }}>{user.last}</td>
-                      <td>{user.high}</td>
+                      <td >{user.high}</td>
                       <td>{user.low}</td>
                       <td style={{ color: chngColor }}>
                         {stik} {user.change}
@@ -310,7 +310,7 @@ function Home() {
                         {stikper}
                         {user.changePercentage}
                       </td>
-                      <td>{user.time}</td>
+                      <td>{user.time == null ? datetoday.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) : user.time}</td>
                     </tr>
                   );
                 })}
