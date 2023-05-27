@@ -10,6 +10,7 @@ import Commodity from './components/Markets/Commodity'
 import Signin from './components/Signin'
 import Signup from './components/Signup'
 import UserDashboard from './components/Dashbord/UserDashboard'
+import HandleClickHistory from './components/Histories/HandleClickHistory'
 
 function App(){
    
@@ -26,6 +27,8 @@ function App(){
                     <Route path='/signin' element={<Signin/>}/>
                     <Route path='/signup' element={<Signup/>}/>
                     <Route path='/dashboard' element={<UserDashboard/>}/>
+                    <Route path='/history' element={<HandleClickHistory/>}/>
+                
                 </Routes>
             </div>
             <Footer />

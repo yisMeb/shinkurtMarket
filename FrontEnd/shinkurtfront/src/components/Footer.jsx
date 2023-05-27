@@ -12,7 +12,7 @@ import {AiFillInstagram} from 'react-icons/ai'
 
 function Footer() {
   return (
-    <div className='content-margin-overlap my-5 container'>
+    <div className='content-margin-overlap my-5 position-relative'>
        <footer className="text-center shadow text-lg-start">
        <div className="container p-4 pb-0">
        <section className="">

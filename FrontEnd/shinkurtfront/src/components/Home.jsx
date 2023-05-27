@@ -9,6 +9,8 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import '../index.css'
 import { saveAs } from 'file-saver';
 import { CSVLink } from 'react-csv';
+import About from './About';
+import HandleClickHistory from './Histories/HandleClickHistory';
 
 function Home() {
   const [commodity, setCommodity] = useState([]);
@@ -24,6 +26,7 @@ function Home() {
   const [dCommodity, setDCommodity] = useState([]);
   const [dcrypto, setDCrypto] = useState([]);
   const [crypto, setCrypto] = useState([]);
+
   const datetoday= new Date();
   
   useEffect(()=>{
@@ -204,13 +207,15 @@ function Home() {
                   const dd = user.day;
                   const hrstiker = hr.includes('-') ? 'red' : 'green';
                   const ddsticker= dd.includes('-') ? 'red' : 'green';
+                  const hstik = hrstiker=='red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
+                  const dstik = ddsticker == 'red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
                   return (
                     <tr key={index}>
                       <td className="name-column">{rowNumber}</td>                      
-                      <td className="name-column"> <Link to='/test' className='link-info text-decoration-none'> {user.name} </Link></td>
+                      <td className="name-column"> <Link to='/history' state={user.name}  className='link-info text-decoration-none'> {user.name} </Link></td>
                       <td style={{ color: color }}>{user.price}</td>
-                      <td style={{ color: hrstiker }}>{user.hour}</td>
-                      <td style={{ color: ddsticker }}>{user.day}</td>
+                      <td style={{ color: hrstiker }}> {hstik} {user.hour}</td>
+                      <td style={{ color: ddsticker }}>{dstik} {user.day}</td>
                       <td>{user.marketCap}</td>
                       <td >{user.volume}</td>
                     </tr>
@@ -298,7 +303,7 @@ function Home() {
                   return (
                     <tr key={index}>
                       <td className="name-column">{rowNumber}</td>                      
-                     <td className="name-column"><Link to='/test' className='link-info text-decoration-none'> {user.name} </Link></td>
+                     <td className="name-column"><Link to='/history' state={user.name} className='link-info text-decoration-none'> {user.name}</Link></td>
                       <td>{user.month}</td>
                       <td style={{ backgroundColor: color }}>{user.last}</td>
                       <td >{user.high}</td>
