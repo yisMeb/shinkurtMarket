@@ -8,9 +8,11 @@ import {BsFacebook} from 'react-icons/bs'
 import {BsTelegram} from 'react-icons/bs'
 import {BsTwitter} from 'react-icons/bs'
 import {AiFillInstagram} from 'react-icons/ai'
-
+import { useTranslation } from 'react-i18next';
 
 function Footer() {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className='content-margin-overlap my-5 position-relative container'>
        <footer className="text-center shadow text-lg-start">
@@ -18,14 +20,14 @@ function Footer() {
        <section className="">
        <div className="row">
        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-       <h5 className="text-uppercase mb-4 font-weight-bold"> Shinkurt</h5>
+       <h5 className="text-uppercase mb-4 font-weight-bold">ሽንኩርት</h5>
             <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, culpa corrupti. Provident eos odit asperiores ipsa molestias!
             </p>
        </div>
        <hr className="w-100 clearfix d-md-none"/>
        <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h5 className="text-uppercase mb-4 font-weight-bold">Products</h5>
+            <h5 className="text-uppercase mb-4 font-weight-bold">{t('Products')}</h5>
             <p>
             <Link to="#" className='text-decoration-none'>Lorem-epsum</Link>
             </p>
@@ -54,7 +56,7 @@ function Footer() {
           </div>
         <hr className="w-100 clearfix d-md-none" /> 
          <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h5 className="text-uppercase mb-4 font-weight-bold">Contact</h5>
+            <h5 className="text-uppercase mb-4 font-weight-bold">{t('Contact')}</h5>
             <p><i className="mr-3"> <FaHome/> </i> Addis Ababa, Ethiopia</p>
              <p><i className="mr-3"> <AiOutlineMail/></i> info@gmail.com</p>
             <p><i className="mr-3"> <AiFillPhone/> </i> +1121822548</p>
