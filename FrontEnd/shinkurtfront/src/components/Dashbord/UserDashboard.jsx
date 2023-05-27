@@ -66,7 +66,7 @@ const UserDashboard = () => {
   }));
 
   // <Line data={[{ id: "line", data: datePriceData }]} />
-  //  <Line data={[{ id: "line", data: dateChangePercentageData }]} />
+   <Line data={[{ id: "line", data: dateChangePercentageData }]} />
 
   return (
     <div className="admin-dashboard">

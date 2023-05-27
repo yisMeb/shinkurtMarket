@@ -15,7 +15,7 @@ function Header() {
         <div className="container">
            <Link to='/' className="navbar-brand mb-0 h1 give-space-mr">
             <img className="d-inline-block align-top" src='../../onion.png' alt='logo' width={30} height={30}></img>
-            Shinkurt</Link>  
+            ሽንኩርት</Link>  
           <button type='button' data-bs-toggle='collapse' data-bs-target="#navbarNav" className="navbar-toggler" aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
             <span className="navbar-toggler-icon"></span>
           </button>

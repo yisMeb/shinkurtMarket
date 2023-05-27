@@ -12,7 +12,7 @@ import {AiFillInstagram} from 'react-icons/ai'
 
 function Footer() {
   return (
-    <div className='content-margin-overlap my-5 position-relative'>
+    <div className='content-margin-overlap my-5 position-relative container'>
        <footer className="text-center shadow text-lg-start">
        <div className="container p-4 pb-0">
        <section className="">
@@ -68,7 +68,7 @@ function Footer() {
         <div className="col-md-7 col-lg-8 text-center text-md-start">
         <div className="p-3">
         © 2023 Copyright:
-              <Link to='/home'>shinkurt.com</Link>
+              <Link to='/'>shinkurt.com</Link>
              </div>
             </div>
             <div className="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
