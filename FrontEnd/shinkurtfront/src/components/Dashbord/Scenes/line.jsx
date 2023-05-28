@@ -1,9 +1,10 @@
-// Line.jsx
-
 import React from "react";
-import { ResponsiveLine } from "@nivo/line";
-
+import { ResponsiveLine, Crosshair } from "@nivo/line";
 const Line = ({ data }) => {
+  const xTickValues = data[0].data
+    .filter((d, index) => index % 30 === 0) // Filter every 30th data point
+    .map((d) => d.x);
+
   return (
     <div style={{ height: "400px" }}>
       <ResponsiveLine
@@ -20,8 +21,25 @@ const Line = ({ data }) => {
         curve="monotoneX"
         axisTop={null}
         axisRight={null}
-        axisBottom={null}
-        axisLeft={null}
+        axisBottom={{
+          orient: "bottom",
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Date",
+          legendOffset: 36,
+          legendPosition: "middle",
+          tickValues: xTickValues,
+        }}
+        axisLeft={{
+          orient: "left",
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Value",
+          legendOffset: -40,
+          legendPosition: "middle",
+        }}
         enableGridX={false}
         enableGridY={false}
         enablePoints={false}
@@ -32,6 +50,22 @@ const Line = ({ data }) => {
         animate={true}
         motionStiffness={90}
         motionDamping={15}
+        tooltip={({ point }) => (
+          <div
+            style={{
+              background: "white",
+              padding: "9px 12px",
+              border: "1px solid #ccc",
+            }}
+          >
+            <div>
+              <strong>Date:</strong> {point.data.xFormatted}
+            </div>
+            <div>
+              <strong>Value:</strong> {point.data.yFormatted}
+            </div>
+          </div>
+        )}
       />
     </div>
   );

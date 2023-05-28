@@ -22,6 +22,7 @@ builder.Services.AddDbContext<CreadientialDbContext>(options =>
 builder.Services.AddDbContext<cryptoDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
 builder.Services.AddHttpClient();
+builder.Services.AddMvc();
 
 //localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");

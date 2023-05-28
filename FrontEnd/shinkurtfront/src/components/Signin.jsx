@@ -1,125 +1,120 @@
-import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import SIgn_img from './SIgn_img'
-import { useNavigate } from 'react-router-dom'
-import { NavLink } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import SIgn_img from "./SIgn_img";
+import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const Login = () => {
+  const history = useNavigate();
+  const [email, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  // const modifiedEmail = email.replace(/\@/g, "%40");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    try {
+      //tried to use axios but it is not working
+      const response = await axios.post("https://localhost:44372/Login", {
+        Email: email,
+        Password: password,
+      });
+      //tried to use fetch but it is not working
+      const response2 = await fetch("https://localhost:44372/Login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Email: email,
+          Password: password,
+        }),
+      });
 
-    const history = useNavigate();
+      console.log(response.status);
+      console.log(response2.status);
+      // Handle the response
+      const { token } = response.data;
+      console.log(token);
 
-    const [inpval, setInpval] = useState({
-        email: "",
-        password: ""
-    })
+      // Store the authentication token in local storage or a state management solution
+      localStorage.setItem("token", token);
 
-    const [data, setData] = useState([]);
-    console.log(inpval);
-
-    const getdata = (e) => {
-        // console.log(e.target.value);
-
-
-        const { value, name } = e.target;
-        // console.log(value,name);
-
-
-        setInpval(() => {
-            return {
-                ...inpval,
-                [name]: value
-            }
-        })
-
+      // Set loggedIn state to true to trigger the redirect
+      setLoggedIn(true);
+    } catch (error) {
+      // Handle error
+      console.error(error);
     }
+  };
 
-    const addData = (e) => {
-        e.preventDefault();
+  if (loggedIn) {
+    // Redirect to the user dashboard
+    return <NavLink to="/dashboard" />;
+  }
 
-        const getuserArr = localStorage.getItem("useryoutube");
-        console.log(getuserArr);
+  return (
+    <>
+      <div className="container mt-3">
+        <section className="d-flex justify-content-between">
+          <div className="left_data mt-3 p-3" style={{ width: "100%" }}>
+            <h3 className="text-center col-lg-6">Sin IN</h3>
+            <h1 className="text-center col-lg-6"></h1>
+            <h1 className="text-center col-lg-6"></h1>
+            <h1 className="text-center col-lg-20"></h1>
 
-        const { email, password } = inpval;
-        if (email === "") {
-            toast.error('email field is requred', {
-                position: "top-center",
-            });
-        } else if (!email.includes("@")) {
-            toast.error('plz enter valid email addres', {
-                position: "top-center",
-            });
-        } else if (password === "") {
-            toast.error('password field is requred', {
-                position: "top-center",
-            });
-        } else if (password.length < 5) {
-            toast.error('password length greater five', {
-                position: "top-center",
-            });
-        } else {
+            <h1 className="text-center col-lg-6">Sign In</h1>
+            <Form>
+              <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
+                <Form.Control
+                  type="email"
+                  name="email"
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter email"
+                />
+              </Form.Group>
 
-            if (getuserArr && getuserArr.length) {
-                const userdata = JSON.parse(getuserArr);
-                const userlogin = userdata.filter((el, k) => {
-                    return el.email === email && el.password === password
-                });
+              <Form.Group
+                className="mb-3 col-lg-6"
+                controlId="formBasicPassword"
+              >
+                <Form.Control
+                  type="password"
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                />
+              </Form.Group>
+              <Button
+                variant="primary"
+                className="col-lg-6"
+                onClick={handleLogin}
+                style={{ background: "rgb(67, 185, 127)" }}
+                type="submit"
+              >
+                Log In
+              </Button>
+            </Form>
 
-                if (userlogin.length === 0) {
-                    alert("invalid details")
-                } else {
-                    console.log("user login succesfulyy");
+            <span>
+              <NavLink to="/signup"></NavLink>
+            </span>
+            <p className="mt-3">
+              <span>
+                <NavLink to="/signup">Forgot Password? </NavLink>
+              </span>{" "}
+            </p>
+          </div>
+          <SIgn_img />
+        </section>
+        <ToastContainer />
+      </div>
+    </>
+  );
+};
 
-                    localStorage.setItem("user_login", JSON.stringify(userlogin))
-
-                    history("/details")
-                }
-            }
-        }
-
-    }
-
-    return (
-        <>
-            <div className="container mt-3">
-                <section className='d-flex justify-content-between'>
-                    <div className="left_data mt-3 p-3" style={{ width: "100%" }}>
-                    <h3 className='text-center col-lg-6'>Sin IN</h3>
-                    <h1 className='text-center col-lg-6'></h1>
-                    <h1 className='text-center col-lg-6'></h1>
-                    <h1 className='text-center col-lg-20'></h1>
-                    
-                        <h1 className='text-center col-lg-6'>Sign In</h1>
-                        <Form >
-
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicEmail">
-
-                                <Form.Control type="email" name='email' onChange={getdata} placeholder="Enter email" />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3 col-lg-6" controlId="formBasicPassword">
-
-                                <Form.Control type="password" name='password' onChange={getdata} placeholder="Password" />
-                            </Form.Group>
-                            <Button variant="primary" className='col-lg-6' onClick={addData} style={{ background: "rgb(67, 185, 127)" }} type="submit">
-                            Log in
-                            </Button>   
-                        </Form>
-                       
-     
-         <span><NavLink to="/signup"></NavLink></span>
-      <p className='mt-3'><span><NavLink to="/signup">Forgot Password? </NavLink></span> </p>
-                    </div>
-                    <gold />
-                    <SIgn_img />
-                </section>
-                <ToastContainer />
-            </div>
-        </>
-
-    )
-}
-
-export default Login
+export default Login;
