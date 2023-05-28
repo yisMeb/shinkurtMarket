@@ -3,20 +3,29 @@ import React, { useEffect, useState } from 'react'
 import '../index.css'
 import {BsMoonStarsFill} from 'react-icons/bs'
 import {CgSun} from 'react-icons/cg'
+import { useTranslation } from 'react-i18next';
 
 function Header() {
+
+      const { t, i18n } = useTranslation();
       const [theme,setTheme]=useState(document.body.dataset.bsTheme);
       const [navtheme,setNavtheme]=useState("navbar-dark bg-dark");
-       useEffect(()=>{
+      
+      useEffect(()=>{
         document.body.dataset.bsTheme=theme
        },[theme])
-  return (
-    <header>
+
+       const handleLanguageChange = (event) => {
+        const selectedLanguage = event.target.value;
+        i18n.changeLanguage(selectedLanguage);
+      };
+
+return (
         <nav className={navtheme + " navbar fixed-top navbar-expand-lg border-bottom p-3 shadow-lg mb-5"}>
         <div className="container">
            <Link to='/' className="navbar-brand mb-0 h1 give-space-mr">
             <img className="d-inline-block align-top" src='../../onion.png' alt='logo' width={30} height={30}></img>
-            Shinkurt</Link>  
+            ሽንኩርት</Link>  
           <button type='button' data-bs-toggle='collapse' data-bs-target="#navbarNav" className="navbar-toggler" aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -24,39 +33,44 @@ function Header() {
             <ul className="navbar-nav">
               <li className="nav-item active">
                  <Link to='/' className="nav-link active">
-                  Home 
+                 {t('Home')}
                  </Link>
               </li>    
               <li className="nav-item dropdown">
                  <Link to="#" className="nav-link dropdown-toggle" id='navbarDropdown' role='button' data-bs-toggle="dropdown" aria-expanded='false'>
-                  Catagory
+                 {t('Catagory')}
                  </Link>
                  <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                    <li><Link to='/forex'className="dropdown-item">Forex</Link></li>
-                    <li><Link to='/crypto'className="dropdown-item">crypto</Link></li>
-                    <li><Link to='/localmarket'className="dropdown-item">Local Markets</Link></li>
+                    <li><Link to='/crypto'className="dropdown-item"> {t('crypto')}</Link></li>
+                    <li><Link to='/commodity'className="dropdown-item"> {t('commodity')}</Link></li>
                  </ul>
               </li>
               <li className="nav-item active">
                  <Link to="/about" className="nav-link">
-                  About
+                 {t('About')}
                  </Link>
               </li>
               <li className="nav-item active">
                  <Link to="/contact" className="nav-link">
-                  Contact
+                 {t('Contact')}
                  </Link>
               </li>
             </ul>
             <div className="give-space-mr">
               <Link to='/signin' type='button' className="btn btn-outline-primary active btn-space-giver">
-              LogIn
+              {t('LogIn')}
             </Link>
             <Link to='/signup' type='button'  className="btn btn-outline-primary btn-space-giver">
-              SignUp
+            {t('SignUp')}
             </Link>
             </div>  
-
+            <div>
+      <label htmlFor="Language">{t('Language')}</label>
+      <select id="Language" value={i18n.language} onChange={handleLanguageChange}>
+        <option value="en-US">{t('English')}</option>
+        <option value="am-ET">{t('Amharic')}</option>
+      </select>
+    </div>
     <div className='form-check form-switch mx-4'>
       {theme==="dark" ? <BsMoonStarsFill size={30}/> : <CgSun size={30}/>}
       <input
@@ -70,11 +84,11 @@ function Header() {
            setNavtheme(theme==="dark" ? "navbar-light bg-light" : "navbar-dark bg-dark")
           }}
       />
-    </div>  
+    </div> 
+    
       </div>
     </div>
     </nav> 
-  </header>
   )
 }
 export default Header

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections;
@@ -19,10 +20,13 @@ namespace WebApplication1.Controllers
     {
         private readonly CommiditiesDbContext _dbContext;
         private readonly IConfiguration _configuration;
-        public ScrappingPriceController(CommiditiesDbContext context, IConfiguration configuration)
+        private readonly IStringLocalizer<ScrappingPriceController> _localizer;
+
+        public ScrappingPriceController(CommiditiesDbContext context, IConfiguration configuration, IStringLocalizer<ScrappingPriceController> localizer)
         {
             _dbContext = context;
             _configuration = configuration;
+            _localizer= localizer;
         }
 
         [Route("GetScrappName")]

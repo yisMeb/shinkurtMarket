@@ -5,7 +5,7 @@ import SIgn_img from './SIgn_img'
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
 
@@ -80,7 +80,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="container mt-3">
+            <div className="container mt-3 content-margin-overlap">
                 <section className='d-flex justify-content-between'>
                     <div className="left_data mt-3 p-3" style={{ width: "100%" }}>
                         <h3 className='text-center col-lg-6'>Sin Us</h3>
