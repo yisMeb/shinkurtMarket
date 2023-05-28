@@ -26,7 +26,7 @@ namespace WebApplication1.Repo
             return result;
         }
 
-        public async Task<bool> Login(string userName, string password, string qrCode)
+        public async Task<bool> Login(string userName, string password)
         {
             
                 var user = await userManager.FindByNameAsync(userName);

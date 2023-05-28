@@ -3,6 +3,8 @@ import axios from "axios";
 import "./../../index.css";
 import "./Scenes/line";
 import Line from "./Scenes/line";
+import moment from "moment";
+import Button from "react-bootstrap/Button";
 
 const Sidebar = () => {
   return (
@@ -60,6 +62,8 @@ const ChartComponent = () => {
 
 const UserDashboard = () => {
   const [data, setData] = useState([]);
+  const [startDate, setStartDate] = useState([]);
+  const [endDate, setEndDate] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,6 +72,7 @@ const UserDashboard = () => {
         );
         const parsedData = response.data.map((item) => ({
           g_id: parseFloat(item.g_id),
+          //date: moment(item.date, "dd/mm/yyyy").toDate(),
           date: item.date,
           price: parseFloat(item.price),
           open: parseFloat(item.open),
@@ -86,11 +91,28 @@ const UserDashboard = () => {
     };
     fetchData();
   }, []);
-  //filtering data to get sets of data we want to display
-  {
-    /*
+
+  const datePriceData = data.map(({ date, price }) => ({
+    x: date,
+    y: price,
+  }));
+  console.log(datePriceData);
+
+  const dateChangePercentageData = data.map(({ date, changePercentage }) => ({
+    x: date,
+    y: changePercentage,
+  }));
+  //select date for veiewing data
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
+  };
+
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
+  };
+
   const dateChangePercentageData2 = data
-    .filter(({ date }) => {
+    .filter(({ Date }) => {
       // Assuming Date is a string in the format 'YYYY-MM-DD'
       if (startDate && endDate) {
         return Date >= startDate && Date <= endDate;
@@ -109,20 +131,6 @@ const UserDashboard = () => {
     }));
 
   console.log(dateChangePercentageData2);
-
-   */
-  }
-  const datePriceData = data.map(({ date, price }) => ({
-    x: date,
-    y: price,
-  }));
-  console.log(datePriceData);
-
-  const dateChangePercentageData = data.map(({ date, changePercentage }) => ({
-    x: date,
-    y: changePercentage,
-  }));
-  //console.log(datePriceData);
   return (
     <div className="admin-dashboard">
       <Sidebar />

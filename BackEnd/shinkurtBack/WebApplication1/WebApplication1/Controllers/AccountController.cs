@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
 using WebApplication1.Model.User;
 using WebApplication1.Repo;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Text;
+using System.IO;
 
 namespace WebApplication1.Controllers
 {
@@ -49,20 +52,23 @@ namespace WebApplication1.Controllers
         [AcceptVerbs("POST")]
         public async Task<IActionResult> Login(Login loginModel)
         {
+            
             string returnUrl = HttpContext.Request.Query["returnUrl"];
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var user = await userManager.FindByEmailAsync(loginModel.Email);
             if (user != null)
             {
                 var passwordCheck = await userManager.CheckPasswordAsync(user, loginModel.Password);
                 if (passwordCheck)
                 {
-                    var result = await signInManager.PasswordSignInAsync(user, loginModel.Password, loginModel.RememberMe, false);
+                    var result = await signInManager.PasswordSignInAsync(user, loginModel.Password, false ,false);
                     if (result.Succeeded)
                     {
-                        return Ok("Logged in successfully!");
+                        return Ok(new { token = "your-auth-token" });
                     }
                 }
                 TempData["Message"] = "Wrong Credential, Please, try again";
