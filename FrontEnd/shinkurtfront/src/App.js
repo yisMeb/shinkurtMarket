@@ -35,7 +35,6 @@ i18n.init({
 });
 
 function App() {
-
   return (
     <I18nextProvider i18n={i18n}>
       <Header/>
@@ -48,8 +47,8 @@ function App() {
           <Route path='/commodity' element={<Commodity />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/dashboard' element={<UserDashboard />} />
           <Route path='/history' element={<HandleClickHistory />} />
+          <Route path='/dashboard' element={<UserDashboard />} />
         </Routes>
       </div>
       <Footer />
