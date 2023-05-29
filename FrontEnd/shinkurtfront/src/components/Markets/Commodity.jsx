@@ -5,6 +5,7 @@ import { TiArrowSortedUp } from 'react-icons/ti';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
+import {AiOutlineStar} from 'react-icons/ai'
 
 
 function Commodity() {
@@ -16,6 +17,7 @@ function Commodity() {
   const [searchQuery, setSearchQuery] = useState('');
   const [dCommodity, setDCommodity] = useState([]);
   const { t, i18n } = useTranslation();
+  const [activeRowsCom, setActiveRowsCom] = useState([]); // Track active state for each row
 
   const datetoday= new Date();
   useEffect(() => {
@@ -83,10 +85,19 @@ function Commodity() {
   const displayedCommodity = showAll ? commodity : commodity.slice(0, 10).filter((user) =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    const handleClickFav = (index) => {
+      /* check if user is signin here*/
+       
+      /* select the rows as favorites */
+      setActiveRowsCom((prevActiveRows) => {
+        const updatedActiveRows = [...prevActiveRows];
+        updatedActiveRows[index] = !updatedActiveRows[index];
+        return updatedActiveRows;
+      });
+    };
 
-  return (
+return (
     <>
-    {/* search */}
     <div className="container container content-margin-overlap">
         <h3>{t('List of Commodities')}</h3>
           <div className="form-group">
@@ -102,9 +113,10 @@ function Commodity() {
         {/* Creating our Tables commodity below */}
         <div className="container">
           <div className="mt-2">
-            <table className="table table-striped">
+            <table className="table">
               <thead>
                 <tr> 
+                  <th scope='col'>Fav</th>
                   <th scope='col'>#</th>
                   <th scope='col' className="name-column">{t('Name')}</th>
                   <th scope='col'>{t('Month')}</th>
@@ -118,6 +130,7 @@ function Commodity() {
               </thead>
               <tbody className='hvrChnage'>
                 {displayedCommodity.map((user, index) => {
+                  const isActive = activeRowsCom[index] || false;
                   const isHighlighted = highlightedIndex === index;
                   const color = isHighlighted ? 'lightgreen' : '';
                   const chngVal = user.change;
@@ -139,6 +152,13 @@ function Commodity() {
                     );
                   return (
                     <tr key={index}>
+                      <button
+                        className="border-0"
+                        onClick={() => handleClickFav(index)}
+                        style={{ color: isActive ? 'orange' : 'initial' }}
+                      >
+                        <AiOutlineStar />
+                      </button>
                       <td className="name-column">{rowNumber}</td>                      
                      <td className="name-column"><Link to='/history' state={user.name} className='link-info text-decoration-none'> {user.name}</Link></td>
                       <td>{user.month}</td>
