@@ -17,26 +17,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log(email, password);
+    let data = { Email: email, Password: password };
     try {
-      //tried to use axios but it is not working
-      const response = await axios.post("https://localhost:44372/Login", {
-        Email: email,
-        Password: password,
-      });
-      //tried to use fetch but it is not working
-      const response2 = await fetch("https://localhost:44372/Login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Email: email,
-          Password: password,
-        }),
-      });
+      //its working
+      const response = await axios.post("https://localhost:44372/Login", data);
 
       console.log(response.status);
-      console.log(response2.status);
+
       // Handle the response
       const { token } = response.data;
       console.log(token);

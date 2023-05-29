@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -54,13 +55,14 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(config =>
 }).AddEntityFrameworkStores<CreadientialDbContext>();
 
 builder.Services.AddCors(options =>
-{
+{   
     var frontendUrl = configuration.GetValue<string>("frontend_url");
 
     options.AddDefaultPolicy(builder =>
     {
         builder.WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader();
     });
+
 
 });
 
@@ -77,11 +79,14 @@ var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocali
 app.UseRequestLocalization(localizationOptions.Value);
 
 app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
 app.UseCors();
+
 
 app.UseRouting();
 
-app.UseAuthorization();
 
 app.MapControllers();
 

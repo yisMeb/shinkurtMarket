@@ -25,7 +25,7 @@ namespace WebApplication1.Controllers
        // [HttpPost]
         [Route("SignUp")]
         [AcceptVerbs("POST")]
-        public async Task<IActionResult> SignUp(User signupModel)
+        public async Task<IActionResult> SignUp([FromBody] User signupModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -50,7 +50,7 @@ namespace WebApplication1.Controllers
        // [HttpPost]
         [Route("Login")]
         [AcceptVerbs("POST")]
-        public async Task<IActionResult> Login(Login loginModel)
+        public async Task<IActionResult> Login([FromBody] Login loginModel)
         {
             
             string returnUrl = HttpContext.Request.Query["returnUrl"];
