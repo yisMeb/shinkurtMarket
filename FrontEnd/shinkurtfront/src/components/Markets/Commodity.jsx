@@ -87,7 +87,7 @@ function Commodity() {
     );
     const handleClickFav = (index) => {
       /* check if user is signin here*/
-    
+       
       /* select the rows as favorites */
       setActiveRowsCom((prevActiveRows) => {
         const updatedActiveRows = [...prevActiveRows];
