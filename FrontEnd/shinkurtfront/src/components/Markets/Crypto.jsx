@@ -128,7 +128,7 @@ return (
                   const emailWithQuotes = localStorage.getItem('email');
                   const email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
               const handleColorChange = async (isActive, user) => {
-                if (isActive) {
+                if (!isActive) {
                    try {
                    await axios.post("https://localhost:44372/Favorite", {
                    favoriteName: user.name,
