@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TiArrowSortedUp } from 'react-icons/ti';
 import { AiFillCaretDown } from 'react-icons/ai';
@@ -7,6 +7,7 @@ import '../../index.css'
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
 import {AiOutlineStar} from 'react-icons/ai'
+import { use } from 'i18next';
 
 function Crypto() {
   const [showAllCry, setShowAllCry] = useState(false);
@@ -16,6 +17,7 @@ function Crypto() {
   const [crypto, setCrypto] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(null);
   const [activeRows, setActiveRows] = useState([]); // Track active state for each row
+  const [fav, setFav] = useState("");
 
   useEffect(()=>{
     const fetchCrypto = async () => {  
@@ -62,21 +64,26 @@ function Crypto() {
 const { t, i18n } = useTranslation();
 
 /* handle click favorite crypto */
+const navigate = useNavigate();
 
-const handleClickFav = (index) => {
-
-  /* check if user is signin here*/
-
-
-  /* select the rows as favorites */
-  setActiveRows((prevActiveRows) => {
-    const updatedActiveRows = [...prevActiveRows];
-    updatedActiveRows[index] = !updatedActiveRows[index];
-    return updatedActiveRows;
-  });
+const handleClickFav = async (index, user) => {
+  
+  if (!localStorage.getItem('token')) {
+    navigate('/signin', { replace: true });
+  } 
+  else {
+      setActiveRows((prevActiveRows) => {
+      const updatedActiveRows = [...prevActiveRows];
+      const isActive = updatedActiveRows[index] || false;
+      updatedActiveRows[index] = !updatedActiveRows[index];
+      setFav(user.name)
+      return updatedActiveRows;
+   });
+     
+  }
 };
-
-  return (
+  //
+return (
     <>
        {/* crypto */}
        <div className="container content-margin-overlap">
@@ -117,12 +124,40 @@ const handleClickFav = (index) => {
                   const ddsticker= dd.includes('-') ? 'red' : 'green';
                   const hstik = hrstiker=='red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
                   const dstik = ddsticker == 'red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
+                  //                
+                  const emailWithQuotes = localStorage.getItem('email');
+                  const email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
+              const handleColorChange = async (isActive, user) => {
+                if (isActive) {
+                   try {
+                   await axios.post("https://localhost:44372/Favorite", {
+                   favoriteName: user.name,
+                   email: email2
+                   });
+                   } catch (error) {
+                    console.log(error);
+                   }
+                   }else{
+                   try {
+                   await axios.post("https://localhost:44372/FavoriteRemove", {
+                   favoriteName: user.name,
+                   email: email2
+                   });
+                   } catch (error) {
+                   console.log(error);
+                  }
+                  }
+                 };
+                  //
                   return (
                     <tr key={index}>
                       <button
                         className="border-0"
-                        onClick={() => handleClickFav(index)}
-                        style={{ color: isActive ? 'orange' : 'initial' }}
+                        onClick={() => {
+                          handleClickFav(index, user);
+                          handleColorChange(isActive, user);
+                        }}
+                        style={{ color: isActive ? 'orange': 'initial'}}
                       >
                         <AiOutlineStar />
                       </button>

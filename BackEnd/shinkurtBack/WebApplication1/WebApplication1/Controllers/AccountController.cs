@@ -42,8 +42,7 @@ namespace WebApplication1.Controllers
             };
             var result = await userManager.CreateAsync(newUser, signupModel.Password);
             if (result.Succeeded)
-                //return RedirectToAction("Index", "Home");
-                return Ok("Logged in successfully!");
+                return Ok("SignedUp successfully!");
             return BadRequest(ModelState);
 
         }
@@ -68,7 +67,9 @@ namespace WebApplication1.Controllers
                     var result = await signInManager.PasswordSignInAsync(user, loginModel.Password, false ,false);
                     if (result.Succeeded)
                     {
-                        return Ok(new { token = "your-auth-token" });
+                        return Ok(
+                            new { token = "your-auth-token", user=user}
+                        );
                     }
                 }
                 TempData["Message"] = "Wrong Credential, Please, try again";

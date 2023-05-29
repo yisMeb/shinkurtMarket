@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TiArrowSortedUp } from 'react-icons/ti';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
 import {AiOutlineStar} from 'react-icons/ai'
-
 
 function Commodity() {
   const [commodity, setCommodity] = useState([]);
@@ -18,6 +17,7 @@ function Commodity() {
   const [dCommodity, setDCommodity] = useState([]);
   const { t, i18n } = useTranslation();
   const [activeRowsCom, setActiveRowsCom] = useState([]); // Track active state for each row
+  const [fav, setFav] = useState("");
 
   const datetoday= new Date();
   useEffect(() => {
@@ -85,17 +85,21 @@ function Commodity() {
   const displayedCommodity = showAll ? commodity : commodity.slice(0, 10).filter((user) =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    const handleClickFav = (index) => {
+    const navigate = useNavigate();
+    const handleClickFav = (index, user) => {
       /* check if user is signin here*/
-       
+        if(!localStorage.getItem('token')){
+          navigate('/signin', { replace: true });
+        }else{  
       /* select the rows as favorites */
       setActiveRowsCom((prevActiveRows) => {
         const updatedActiveRows = [...prevActiveRows];
         updatedActiveRows[index] = !updatedActiveRows[index];
+        const isActive = updatedActiveRows[index] || false;
+        setFav(user.name)
         return updatedActiveRows;
       });
-    };
-
+     } };
 return (
     <>
     <div className="container container content-margin-overlap">
@@ -150,11 +154,38 @@ return (
                     ) : (
                       <AiFillCaretDown />
                     );
+
+                    const emailWithQuotes = localStorage.getItem('email');
+                    const email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
+                const handleColorChange = async (isActive, user) => {
+                  if (isActive) {
+                     try {
+                     await axios.post("https://localhost:44372/Favorite", {
+                     favoriteName: user.name,
+                     email: email2
+                     });
+                     } catch (error) {
+                      console.log(error);
+                     }
+                     }else{
+                     try {
+                     await axios.post("https://localhost:44372/FavoriteRemove", {
+                     favoriteName: user.name,
+                     email: email2
+                     });
+                     } catch (error) {
+                     console.log(error);
+                    }
+                    }
+                   };
+
                   return (
                     <tr key={index}>
                       <button
                         className="border-0"
-                        onClick={() => handleClickFav(index)}
+                        onClick={() => {handleClickFav(index); 
+                            handleColorChange(isActive, user);
+                            }}
                         style={{ color: isActive ? 'orange' : 'initial' }}
                       >
                         <AiOutlineStar />
