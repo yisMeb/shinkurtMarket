@@ -11,7 +11,6 @@ namespace WebApplication1.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder);
             // Configure the foreign key relationship between MyModel and AspNetUsers
             modelBuilder.Entity<Favorite>()

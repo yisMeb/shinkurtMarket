@@ -71,7 +71,7 @@ namespace WebApplication1.Controllers
             {
                 return BadRequest("Email not found");
             }
-
+            //remove fav from db
             _dbContext.favorites.Remove(favname);
             await _dbContext.SaveChangesAsync();
 
