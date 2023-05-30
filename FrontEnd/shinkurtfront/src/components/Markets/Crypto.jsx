@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TiArrowSortedUp } from 'react-icons/ti';
 import { AiFillCaretDown } from 'react-icons/ai';
 import '../../index.css'
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
+import {AiOutlineStar} from 'react-icons/ai'
 
 function Crypto() {
   const [showAllCry, setShowAllCry] = useState(false);
@@ -14,6 +15,8 @@ function Crypto() {
   const [dcrypto, setDCrypto] = useState([]);
   const [crypto, setCrypto] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [activeRows, setActiveRows] = useState([]); // Track active state for each row
+  const [fav, setFav] = useState("");
 
   useEffect(()=>{
     const fetchCrypto = async () => {  
@@ -56,8 +59,30 @@ function Crypto() {
   const displayedCrypto = showAllCry ? crypto : crypto.slice(0, 10).filter((user) =>
   user.name.toLowerCase().includes(searchQueryCrypto.toLowerCase())
 );
+/* initializing localization */
 const { t, i18n } = useTranslation();
-  return (
+
+/* handle click favorite crypto */
+const navigate = useNavigate();
+
+const handleClickFav = async (index, user) => {
+  
+  if (!localStorage.getItem('token')) {
+    navigate('/signin', { replace: true });
+  } 
+  else {
+      setActiveRows((prevActiveRows) => {
+      const updatedActiveRows = [...prevActiveRows];
+      const isActive = updatedActiveRows[index] || false;
+      updatedActiveRows[index] = !updatedActiveRows[index];
+      setFav(user.name)
+      return updatedActiveRows;
+   });
+     
+  }
+};
+  //
+return (
     <>
        {/* crypto */}
        <div className="container content-margin-overlap">
@@ -73,9 +98,10 @@ const { t, i18n } = useTranslation();
               onChange={handleSearchCrypto}
             />
           </div>
-            <table className="table table-striped">
+            <table className="table">
               <thead>
                 <tr> 
+                  <th scope='col'>Fav</th>
                   <th scope='col'>#</th>
                   <th scope='col' className="name-column">{t('Name')}</th>
                   <th scope='col'>{t('Price')}</th>
@@ -87,6 +113,7 @@ const { t, i18n } = useTranslation();
               </thead>
               <tbody className='hvrChnage'>
                 {displayedCrypto.map((user, index) => {
+                  const isActive = activeRows[index] || false;
                   const isHighlighted = highlightedIndex === index;
                   const color = isHighlighted ? 'green' : '';
                   const rowNumber = index + 1;
@@ -96,8 +123,43 @@ const { t, i18n } = useTranslation();
                   const ddsticker= dd.includes('-') ? 'red' : 'green';
                   const hstik = hrstiker=='red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
                   const dstik = ddsticker == 'red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
+                  //                
+                  const emailWithQuotes = localStorage.getItem('email');
+                  const email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
+              const handleColorChange = async (isActive, user) => {
+                if (!isActive) {
+                   try {
+                   await axios.post("https://localhost:44372/Favorite", {
+                   favoriteName: user.name,
+                   email: email2
+                   });
+                   } catch (error) {
+                    console.log(error);
+                   }
+                   }else{
+                   try {
+                   await axios.post("https://localhost:44372/FavoriteRemove", {
+                   favoriteName: user.name,
+                   email: email2
+                   });
+                   } catch (error) {
+                   console.log(error);
+                  }
+                  }
+                 };
+                  //
                   return (
                     <tr key={index}>
+                      <button
+                        className="border-0"
+                        onClick={() => {
+                          handleClickFav(index, user);
+                          handleColorChange(isActive, user);
+                        }}
+                        style={{ color: isActive ? 'orange': 'initial'}}
+                      >
+                        <AiOutlineStar />
+                      </button>
                       <td className="name-column">{rowNumber}</td>                      
                       <td className="name-column"> <Link to='/history' state={user.name}  className='link-info text-decoration-none'> {user.name} </Link></td>
                       <td style={{ color: color }}>{user.price}</td>
