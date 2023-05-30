@@ -65,13 +65,14 @@ namespace WebApplication1.Controllers
             }
 
             var favorite = await _dbContext.favorites.FirstOrDefaultAsync(fav => fav.email == FavModel.email);
+            var favname= await _dbContext.favorites.FirstOrDefaultAsync(fn=>fn.FavoriteName == FavModel.FavoriteName);
 
-            if (favorite == null)
+            if (favorite == null && favname==null)
             {
                 return BadRequest("Email not found");
             }
 
-            _dbContext.favorites.Remove(favorite);
+            _dbContext.favorites.Remove(favname);
             await _dbContext.SaveChangesAsync();
 
             return Ok("Successfully removed");
