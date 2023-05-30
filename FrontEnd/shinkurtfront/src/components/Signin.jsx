@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import SIgn_img from "./SIgn_img";
 import { useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,27 +16,14 @@ const Login = () => {
   // const modifiedEmail = email.replace(/\@/g, "%40");
   const handleLogin = async (e) => {
     e.preventDefault();
-    //console.log(email, password);
+    console.log(email, password);
+    let data = { Email: email, Password: password };
     try {
-      //tried to use axios but it is not working
-      const response = await axios.post("https://localhost:44372/Login", {
-        Email: email,
-        Password: password,
-      }); 
-      //tried to use fetch but it is not working
-      const response2 = await fetch("https://localhost:44372/Login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Email: email,
-          Password: password,
-        }),
-      }); 
+      //its working
+      const response = await axios.post("https://localhost:44372/Login", data);
 
-      //console.log(response.status);
-      console.log(response2.status);
+      console.log(response.status);
+
       // Handle the response
       const { token } = response.data;
       console.log(token);
@@ -55,7 +41,7 @@ const Login = () => {
 
   if (loggedIn) {
     // Redirect to the user dashboard
-    return <Navigate replace to="/dashboard"/>
+    return <NavLink to="/dashboard" />;
   }
 
   return (
