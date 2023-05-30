@@ -7,7 +7,6 @@ import '../../index.css'
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
 import {AiOutlineStar} from 'react-icons/ai'
-import { use } from 'i18next';
 
 function Crypto() {
   const [showAllCry, setShowAllCry] = useState(false);

@@ -142,23 +142,13 @@ return (
                   const chngColor = chngVal.includes('+') ? 'green' : 'red';
                   const chngPerCol = chngvalPer.includes('+') ? 'green' : 'red';
                   const rowNumber = index + 1;
-                  const stik =
-                    chngColor == 'green' ? (
-                      <TiArrowSortedUp />
-                    ) : (
-                      <AiFillCaretDown />
-                    );
-                  const stikper =
-                    chngPerCol == 'green' ? (
-                      <TiArrowSortedUp />
-                    ) : (
-                      <AiFillCaretDown />
-                    );
-
+                  const stik = chngColor == 'green' ? ( <TiArrowSortedUp />  ) : (<AiFillCaretDown />);
+                  const stikper = chngPerCol == 'green' ? ( <TiArrowSortedUp /> ) : (<AiFillCaretDown /> );
+                  //  
                     const emailWithQuotes = localStorage.getItem('email');
                     const email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
                 const handleColorChange = async (isActive, user) => {
-                  if (isActive) {
+                  if (!isActive) {
                      try {
                      await axios.post("https://localhost:44372/Favorite", {
                      favoriteName: user.name,
@@ -183,7 +173,7 @@ return (
                     <tr key={index}>
                       <button
                         className="border-0"
-                        onClick={() => {handleClickFav(index); 
+                        onClick={() => {handleClickFav(index, user); 
                             handleColorChange(isActive, user);
                             }}
                         style={{ color: isActive ? 'orange' : 'initial' }}
