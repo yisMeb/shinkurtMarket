@@ -6,7 +6,6 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import '../../index.css'
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
-import {AiOutlineStar} from 'react-icons/ai'
 
 function Crypto() {
   const [showAllCry, setShowAllCry] = useState(false);
@@ -15,7 +14,6 @@ function Crypto() {
   const [dcrypto, setDCrypto] = useState([]);
   const [crypto, setCrypto] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(null);
-  const [activeRows, setActiveRows] = useState([]); // Track active state for each row
 
   useEffect(()=>{
     const fetchCrypto = async () => {  
@@ -58,24 +56,7 @@ function Crypto() {
   const displayedCrypto = showAllCry ? crypto : crypto.slice(0, 10).filter((user) =>
   user.name.toLowerCase().includes(searchQueryCrypto.toLowerCase())
 );
-/* initializing localization */
 const { t, i18n } = useTranslation();
-
-/* handle click favorite crypto */
-
-const handleClickFav = (index) => {
-
-  /* check if user is signin here*/
-
-
-  /* select the rows as favorites */
-  setActiveRows((prevActiveRows) => {
-    const updatedActiveRows = [...prevActiveRows];
-    updatedActiveRows[index] = !updatedActiveRows[index];
-    return updatedActiveRows;
-  });
-};
-
   return (
     <>
        {/* crypto */}
@@ -92,10 +73,9 @@ const handleClickFav = (index) => {
               onChange={handleSearchCrypto}
             />
           </div>
-            <table className="table">
+            <table className="table table-striped">
               <thead>
                 <tr> 
-                  <th scope='col'>Fav</th>
                   <th scope='col'>#</th>
                   <th scope='col' className="name-column">{t('Name')}</th>
                   <th scope='col'>{t('Price')}</th>
@@ -107,7 +87,6 @@ const handleClickFav = (index) => {
               </thead>
               <tbody className='hvrChnage'>
                 {displayedCrypto.map((user, index) => {
-                  const isActive = activeRows[index] || false;
                   const isHighlighted = highlightedIndex === index;
                   const color = isHighlighted ? 'green' : '';
                   const rowNumber = index + 1;
@@ -119,13 +98,6 @@ const handleClickFav = (index) => {
                   const dstik = ddsticker == 'red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
                   return (
                     <tr key={index}>
-                      <button
-                        className="border-0"
-                        onClick={() => handleClickFav(index)}
-                        style={{ color: isActive ? 'orange' : 'initial' }}
-                      >
-                        <AiOutlineStar />
-                      </button>
                       <td className="name-column">{rowNumber}</td>                      
                       <td className="name-column"> <Link to='/history' state={user.name}  className='link-info text-decoration-none'> {user.name} </Link></td>
                       <td style={{ color: color }}>{user.price}</td>
