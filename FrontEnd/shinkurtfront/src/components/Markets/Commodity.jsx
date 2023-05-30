@@ -6,6 +6,8 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
 import {AiOutlineStar} from 'react-icons/ai'
+import Footer from '../Footer';
+import Header from '../Header';
 
 function Commodity() {
   const [commodity, setCommodity] = useState([]);
@@ -86,6 +88,8 @@ function Commodity() {
       user.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     const navigate = useNavigate();
+    const email2 =null
+    const emailWithQuotes=null
     const handleClickFav = (index, user) => {
       /* check if user is signin here*/
         if(!localStorage.getItem('token')){
@@ -97,9 +101,12 @@ function Commodity() {
         updatedActiveRows[index] = !updatedActiveRows[index];
         const isActive = updatedActiveRows[index] || false;
         setFav(user.name)
+         emailWithQuotes = localStorage.getItem('email');
+         email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
         return updatedActiveRows;
       });
      } };
+     
 return (
     <>
     <div className="container container content-margin-overlap">
@@ -145,8 +152,6 @@ return (
                   const stik = chngColor == 'green' ? ( <TiArrowSortedUp />  ) : (<AiFillCaretDown />);
                   const stikper = chngPerCol == 'green' ? ( <TiArrowSortedUp /> ) : (<AiFillCaretDown /> );
                   //  
-                    const emailWithQuotes = localStorage.getItem('email');
-                    const email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
                 const handleColorChange = async (isActive, user) => {
                   if (!isActive) {
                      try {

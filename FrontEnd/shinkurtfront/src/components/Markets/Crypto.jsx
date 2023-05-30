@@ -7,6 +7,8 @@ import '../../index.css'
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
 import {AiOutlineStar} from 'react-icons/ai'
+import Header from '../Header';
+import Footer from '../Footer';
 
 function Crypto() {
   const [showAllCry, setShowAllCry] = useState(false);
@@ -64,10 +66,10 @@ const { t, i18n } = useTranslation();
 
 /* handle click favorite crypto */
 const navigate = useNavigate();
-
-const handleClickFav = async (index, user) => {
-  
-  if (!localStorage.getItem('token')) {
+const emailWithQuotes =null;
+const email2=null;
+const handleClickFav = async (index, user) => {    
+  if (!localStorage.getItem('token') || !localStorage.getItem('email')) {
     navigate('/signin', { replace: true });
   } 
   else {
@@ -76,11 +78,14 @@ const handleClickFav = async (index, user) => {
       const isActive = updatedActiveRows[index] || false;
       updatedActiveRows[index] = !updatedActiveRows[index];
       setFav(user.name)
+       emailWithQuotes = localStorage.getItem('email'); 
+       email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
       return updatedActiveRows;
    });
      
   }
 };
+  //
   //
 return (
     <>
@@ -124,30 +129,29 @@ return (
                   const hstik = hrstiker=='red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
                   const dstik = ddsticker == 'red' ? <AiFillCaretDown /> : <TiArrowSortedUp />
                   //                
-                  const emailWithQuotes = localStorage.getItem('email');
-                  const email2 = emailWithQuotes.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
-              const handleColorChange = async (isActive, user) => {
-                if (!isActive) {
-                   try {
-                   await axios.post("https://localhost:44372/Favorite", {
-                   favoriteName: user.name,
-                   email: email2
-                   });
-                   } catch (error) {
-                    console.log(error);
-                   }
-                   }else{
-                   try {
-                   await axios.post("https://localhost:44372/FavoriteRemove", {
-                   favoriteName: user.name,
-                   email: email2
-                   });
-                   } catch (error) {
-                   console.log(error);
-                  }
-                  }
-                 };
                   //
+                  const handleColorChange = async (isActive, user) => {
+               
+                    if (!isActive) {
+                      try {
+                      await axios.post("https://localhost:44372/Favorite", {
+                      favoriteName: user.name,
+                      email: email2
+                      });
+                      } catch (error) {
+                       console.log(error);
+                      }
+                      }else{
+                      try {
+                      await axios.post("https://localhost:44372/FavoriteRemove", {
+                      favoriteName: user.name,
+                      email: email2
+                      });
+                      } catch (error) {
+                      console.log(error);
+                     }
+                     }
+                    };
                   return (
                     <tr key={index}>
                       <button

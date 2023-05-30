@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import SIgn_img from "./SIgn_img";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,7 +30,7 @@ const Login = () => {
 
       // Store the authentication token in local storage or a state management solution
       localStorage.setItem("token", token);
-
+      localStorage.setItem("email",email);
       // Set loggedIn state to true to trigger the redirect
       setLoggedIn(true);
     } catch (error) {
@@ -41,7 +41,7 @@ const Login = () => {
 
   if (loggedIn) {
     // Redirect to the user dashboard
-    return <NavLink to="/dashboard" />;
+    return <Navigate replace to="/dashboard"/>;
   }
 
   return (

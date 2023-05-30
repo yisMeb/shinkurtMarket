@@ -8,6 +8,7 @@ import Commodity from './Markets/Commodity';
 import '../index.css'
 import { useTranslation } from 'react-i18next';
 
+
 function Home() {
   const { t, i18n } = useTranslation();
   return (

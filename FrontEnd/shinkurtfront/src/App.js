@@ -11,13 +11,12 @@ import Crypto from './components/Markets/Crypto';
 import Commodity from './components/Markets/Commodity';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
-import UserDashboard from './components/Dashbord/UserDashboard';
 import HandleClickHistory from './components/Histories/HandleClickHistory';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import translationEN from './localization/en-US.json';
 import translationAM from './localization/am-ET.json';
-
+import UserDashboard from './components/Dashbord/UserDashboard'
 i18n.init({
   resources: {
     'en-US': {
@@ -48,12 +47,19 @@ function App() {
           <Route path='/commodity' element={<Commodity />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/dashboard' element={<UserDashboard />} />
+          <Route path='/dashboard' element={<UserDashboardLayout/>} />
           <Route path='/history' element={<HandleClickHistory />} />
         </Routes>
       </div>
       <Footer />
     </I18nextProvider>
+  );
+}
+function UserDashboardLayout() {
+  return (
+    <>
+      <UserDashboard />
+    </>
   );
 }
 
