@@ -5,7 +5,6 @@ import "./Scenes/line";
 import Line from "./Scenes/line";
 import moment from "moment";
 import Button from "react-bootstrap/Button";
-import { json } from "node:stream/consumers";
 
 const Sidebar = () => {
   return (
@@ -35,11 +34,11 @@ const ChartComponent = () => {
   const [endDate, setEndDate] = useState([]);
 
   const handleStartDateChange = (event) => {
-    setStartDate(json.toString(event.target.value));
+    setStartDate(event.target.value);
   };
 
   const handleEndDateChange = (event) => {
-    setEndDate(json.toString(event.target.value));
+    setEndDate(event.target.value);
   };
 
   // Rest of the component code...
