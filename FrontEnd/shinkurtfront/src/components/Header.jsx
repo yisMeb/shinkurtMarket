@@ -4,6 +4,8 @@ import "../index.css";
 import { BsMoonStarsFill } from "react-icons/bs";
 import { CgSun } from "react-icons/cg";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -18,7 +20,23 @@ function Header() {
     const selectedLanguage = event.target.value;
     i18n.changeLanguage(selectedLanguage);
   };
-
+const handleLogout = async (e) => {
+    console.log("logout");
+    e.preventDefault();
+    try {
+      //its working
+      const response = await axios.post('https://localhost:44372/Logout');
+      console.log(response.status);
+      // remove token and email from local storage
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+    } catch (error) {
+      // Handle error
+      console.error(error);
+    }
+    window.location.reload(true)
+    return <Navigate replace to="/"/>;
+  };
   return (
     <nav
       className={
@@ -93,21 +111,31 @@ function Header() {
             </li>
           </ul>
           <div className="give-space-mr">
-            <Link
-              to="/signin"
-              type="button"
-              className="btn btn-outline-primary active btn-space-giver"
-            >
-              {t("LogIn")}
-            </Link>
-            <Link
-              to="/signup"
-              type="button"
-              className="btn btn-outline-primary btn-space-giver"
-            >
-              {t("SignUp")}
-            </Link>
-          </div>
+  {localStorage.getItem('token') && localStorage.getItem('email') ? (
+    <div className="sign"> 
+      <button className="btn btn-outline-primary active btn-space-giver" onClick={handleLogout}>
+        {t("LogOut")}
+      </button>
+    </div>
+   ) : (
+    <div className="sign"> 
+      <Link
+        to="/signin"
+        type="button"
+        className="btn btn-outline-primary active btn-space-giver"
+      >
+        {t("LogIn")}
+      </Link>
+      <Link
+        to="/signup"
+        type="button"
+        className="btn btn-outline-primary btn-space-giver"
+      >
+        {t("SignUp")}
+      </Link>
+    </div>
+  )}
+</div>
           <div>
             <label htmlFor="Language">{t("Language")}</label>
             <select

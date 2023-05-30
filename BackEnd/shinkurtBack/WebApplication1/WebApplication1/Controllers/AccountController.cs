@@ -79,7 +79,13 @@ namespace WebApplication1.Controllers
             return BadRequest(ModelState);
           
         }
-
+        [Route("Logout")]
+        [AcceptVerbs("POST")]
+        public async Task<IActionResult> LoginOut()
+        {
+            await signInManager.SignOutAsync();
+            return Ok("Logged Out");
+        }
     }
     
 }
