@@ -30,7 +30,7 @@ const Login = () => {
 
       // Store the authentication token in local storage or a state management solution
       localStorage.setItem("token", token);
-      localStorage.setItem("email",email);
+      localStorage.setItem("email", email);
       // Set loggedIn state to true to trigger the redirect
       setLoggedIn(true);
     } catch (error) {

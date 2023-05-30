@@ -66,8 +66,8 @@ const { t, i18n } = useTranslation();
 
 /* handle click favorite crypto */
 const navigate = useNavigate();
-const emailWithQuotes =null;
-const email2=null;
+let emailWithQuotes =null;
+let email2=null;
 const handleClickFav = async (index, user) => {    
   if (!localStorage.getItem('token') || !localStorage.getItem('email')) {
     navigate('/signin', { replace: true });
