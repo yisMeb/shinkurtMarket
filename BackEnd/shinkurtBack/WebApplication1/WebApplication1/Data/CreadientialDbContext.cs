@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using WebApplication1.Model;
 
 namespace WebApplication1.Data
 {
@@ -10,10 +10,9 @@ namespace WebApplication1.Data
         public CreadientialDbContext(DbContextOptions<CreadientialDbContext> options) : base(options)
         {
         }
-       // public DbSet<User> Users { get; set; }
-       // public DbSet<Login> logins { get; set; }
-
-
+        // public DbSet<User> Users { get; set; }
+        // public DbSet<Login> logins { get; set; }
+        
     }
 
 }

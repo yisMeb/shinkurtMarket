@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
 using WebApplication1.Data;
-
+using WebApplication1.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +21,8 @@ builder.Services.AddDbContext<CommiditiesDbContext>(options =>
 builder.Services.AddDbContext<CreadientialDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
 builder.Services.AddDbContext<cryptoDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
+builder.Services.AddDbContext<FavoriteDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
 builder.Services.AddHttpClient();
 builder.Services.AddMvc();

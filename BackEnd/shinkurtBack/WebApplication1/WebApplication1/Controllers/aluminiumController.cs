@@ -57,11 +57,8 @@ namespace WebApplication1.Controllers
             hist = await _dbContext.aluminiumHistories.ToListAsync();
             int LastID = _dbContext.aluminiumHistories.Max(p => p.al_Id);
 
-
             var web = new HtmlWeb();
             var doc = web.Load("https://www.investing.com/commodities/aluminum-historical-data");
-
-
             var historyNode = doc.DocumentNode.SelectNodes("//tbody/tr[1]");
 
             var HData = new List<AluminiumHistory>();
