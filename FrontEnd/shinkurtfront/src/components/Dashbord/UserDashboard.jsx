@@ -45,7 +45,7 @@ const ChartComponent = () => {
 
   return (
     <div>
-      <label>
+       <label>
         Start Date:
         <input type="date" value={startDate} onChange={handleStartDateChange} />
       </label>

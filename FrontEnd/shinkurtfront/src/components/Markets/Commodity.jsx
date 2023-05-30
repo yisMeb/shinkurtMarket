@@ -7,7 +7,6 @@ import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
 import {AiOutlineStar} from 'react-icons/ai'
 
-
 function Commodity() {
   const [commodity, setCommodity] = useState([]);
   const [previousValues, setPreviousValues] = useState([]);
@@ -124,7 +123,7 @@ return (
           <div className="mt-2">
             <table className="table">
               <thead>
-                <tr> 
+                <tr>
                   <th scope='col'>Fav</th>
                   <th scope='col'>#</th>
                   <th scope='col' className="name-column">{t('Name')}</th>
@@ -230,5 +229,4 @@ return (
     </>
   )
 }
-
 export default Commodity

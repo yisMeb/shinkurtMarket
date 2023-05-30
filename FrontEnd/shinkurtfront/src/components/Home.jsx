@@ -7,10 +7,19 @@ import Crypto from './Markets/Crypto'
 import Commodity from './Markets/Commodity';
 import '../index.css'
 import { useTranslation } from 'react-i18next';
-
+import {MdOutlineDoubleArrow} from 'react-icons/md'
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const handlePremium=()=>{
+    if (!localStorage.getItem('token') || !localStorage.getItem('email')) {
+      navigate('/signin', { replace: true });
+    }else{
+      return navigate('/subscribe', { replace: true });
+    }
+  }
   return (
     <>
       <div className="content-margin-overlap">
@@ -58,6 +67,12 @@ function Home() {
             </ol>
           </div>
         </div>
+        {/* Subscribe */}
+        <button type="button" 
+        onClick={handlePremium}
+        className='btn btn-outline-primary mt-4 ml-1 shadow-sm btn-sm p-3 col-xs-10 text-left'>
+        {t('TRY OUR SUBSCRIPTION')} {<MdOutlineDoubleArrow size={20}/>}
+        </button>
         {/* Crypto */}
         { <Crypto/> }
         {/* Commodity */}

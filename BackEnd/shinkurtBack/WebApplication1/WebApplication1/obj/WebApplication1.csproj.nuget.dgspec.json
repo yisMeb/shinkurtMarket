@@ -41,6 +41,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Chapa.NET": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "CsvHelper": {
               "target": "Package",
               "version": "[30.0.1, )"

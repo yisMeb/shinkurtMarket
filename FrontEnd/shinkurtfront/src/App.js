@@ -1,5 +1,3 @@
-// App.js
-
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from "./components/Header";
@@ -17,6 +15,9 @@ import i18n from 'i18next';
 import translationEN from './localization/en-US.json';
 import translationAM from './localization/am-ET.json';
 import UserDashboard from './components/Dashbord/UserDashboard'
+import SubscribeUser from './components/Premium/SubscribeUser';
+import ChapaPay from './components/Premium/ChapaPay';
+
 i18n.init({
   resources: {
     'en-US': {
@@ -47,19 +48,14 @@ function App() {
           <Route path='/commodity' element={<Commodity />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/dashboard' element={<UserDashboardLayout/>} />
+          <Route path='/dashboard' element={<UserDashboard/>} />
           <Route path='/history' element={<HandleClickHistory />} />
+          <Route path='/subscribe' element={<SubscribeUser />} />
+          <Route path='/chapa' element={<ChapaPay />} />
         </Routes>
       </div>
       <Footer />
     </I18nextProvider>
-  );
-}
-function UserDashboardLayout() {
-  return (
-    <>
-      <UserDashboard />
-    </>
   );
 }
 

@@ -42,7 +42,7 @@ const Login = () => {
   if (loggedIn) {
     // Redirect to the user dashboard
     window.location.reload(true)
-    return <Navigate replace to="/dashboard"/>;
+    window.location.href = "/dashboard"; // Navigate to the specified URL after the page reloads
   }
 
   return (
