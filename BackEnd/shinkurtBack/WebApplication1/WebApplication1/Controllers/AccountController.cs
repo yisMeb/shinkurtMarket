@@ -80,6 +80,14 @@ namespace WebApplication1.Controllers
           
         }
 
+        [Route("Logout")]
+        [AcceptVerbs("POST")]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
     
 }

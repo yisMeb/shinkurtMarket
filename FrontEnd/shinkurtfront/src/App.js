@@ -12,6 +12,7 @@ import Commodity from './components/Markets/Commodity';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import UserDashboard from './components/Dashbord/UserDashboard';
+import TestDashboard from './components/Dashbord/TestDashboard';
 import HandleClickHistory from './components/Histories/HandleClickHistory';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from 'i18next';
@@ -49,6 +50,8 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/history' element={<HandleClickHistory />} />
           <Route path='/dashboard' element={<UserDashboard />} />
+          {/* this is a test board to build it from scratch to not touch userdashboard */}
+          <Route path='/testdashboard' element={<TestDashboard />} />
         </Routes>
       </div>
       <Footer />
