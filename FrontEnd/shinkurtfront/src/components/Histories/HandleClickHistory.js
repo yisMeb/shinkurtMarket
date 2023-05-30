@@ -2,15 +2,13 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./../../index.css";
-import linedrawer from "../Dashbord/Scenes/line";
 import { useTable, usePagination } from "react-table";
+import linedrawer from "./../Dashbord/Scenes/line.jsx";
 
 function HandleClickHistory({ nameClick }) {
   const location = useLocation();
   console.log(typeof location.state);
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage] = useState(20);
 
   let url = "";
   if (location.state.includes("Aluminium")) {
@@ -99,9 +97,6 @@ function HandleClickHistory({ nameClick }) {
     x: date,
     y: changePercentage,
   }));
-  const drawer = () => {
-    <linedrawer data={[{ id: "line", data: datePriceData }]} />;
-  };
 
   const columns = useMemo(
     () => [
@@ -145,7 +140,7 @@ function HandleClickHistory({ nameClick }) {
       <h2>Historical Data of {location.state}</h2>
       <div className="container">
         <div className="mt-2">
-          <h2>Price</h2>
+          <h2>Price not working and not showing graph below</h2>
           <linedrawer data={[{ id: "line", data: datePriceData }]} />
           <h2>Change Percentage</h2>
           <linedrawer data={[{ id: "line", data: dateChangePercentageData }]} />
@@ -249,4 +244,5 @@ function HandleClickHistory({ nameClick }) {
     </div>
   );
 }
+
 export default HandleClickHistory;

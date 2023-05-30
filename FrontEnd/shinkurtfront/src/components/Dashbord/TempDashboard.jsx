@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Commodity from "./../Markets/Commodity";
 import "react-toastify/dist/ReactToastify.css";
@@ -85,34 +85,6 @@ const GraphComponent = () => {
 };
 
 const TableComponent = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url);
-        const parsedData = response.data
-          .map((item) => ({
-            g_id: parseFloat(item.g_id),
-            //date: moment(item.date, "dd/mm/yyyy").toDate(),
-            date: item.date,
-            price: parseFloat(item.price),
-            open: parseFloat(item.open),
-            high: parseFloat(item.high),
-            low: parseFloat(item.low),
-            volume: parseFloat(item.volume),
-            changePercentage: parseFloat(item.changePercentage),
-          }))
-          .reverse();
-
-        setData(parsedData);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
-  //https://localhost:44372/FavoriteNames
-
   return <div>Table Component</div>;
 };
 
