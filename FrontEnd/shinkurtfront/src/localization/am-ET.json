@@ -28,5 +28,14 @@
     "change %":"ለውጥ %",
     "Time":"ጊዜ",
     "Last":"የመጨረሻ",
-    "Products":"ምርቶች"
+    "Products":"ምርቶች",
+    "Premium":"ፕሪሚየም",
+    "Basic":"መሰረታዊ",
+    "Standard":"መደበኛ",
+    "Subscribe":"መዝግብ",
+    "$9.99/month":"ብር 499/ወር",
+    "$19.99/month":"ብር 1020/ወር",
+    "$29.99/month":"ብር 1500/ወር",
+    "Choose Your Subscription Plan":"የምዝገባ እቅድዎን ይምረጡ",
+    "TRY OUR SUBSCRIPTION":"የደንበኝነት ምዝገባ ይሞክሩ"
 }

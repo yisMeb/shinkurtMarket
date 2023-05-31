@@ -24,6 +24,9 @@ builder.Services.AddDbContext<cryptoDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
 builder.Services.AddDbContext<FavoriteDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
+builder.Services.AddDbContext<PremiumDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
+
 builder.Services.AddHttpClient();
 builder.Services.AddMvc();
 

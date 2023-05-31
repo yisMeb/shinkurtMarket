@@ -160,3 +160,7 @@ C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplic
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\obj\Debug\net7.0\WebApplication1.pdb
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\obj\Debug\net7.0\WebApplication1.genruntimeconfig.cache
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\obj\Debug\net7.0\ref\WebApplication1.dll
+C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Chapa.NET.dll
+C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Flurl.dll
+C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Flurl.Http.dll
+C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Newtonsoft.Json.dll

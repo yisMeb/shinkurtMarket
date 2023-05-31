@@ -35,7 +35,7 @@ const handleLogout = async (e) => {
       console.error(error);
     }
     window.location.reload(true)
-    return <Navigate replace to="/"/>;
+    window.location.href = "/"; // Navigate to the specified URL after the page reloads
   };
   return (
     <nav
