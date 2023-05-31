@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -13,30 +13,52 @@ function ChapaPay() {
   const [lastName, setLastName] = useState('');
   const [amount, setAmount] = useState(birr);
   const [banks,serBanks] =useState([])
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+    
+  let eml=null
+  let emlnoQout=null
 
   const bank = async () => {
     if (!localStorage.getItem('token')) {
       navigate('/signin', { replace: true });
     } else {
-      const eml = localStorage.getItem('email');
-      const emlnoQout = eml.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
+       eml = localStorage.getItem('email');
+       emlnoQout = eml.replace(/^['"](.+(?=['"]$))['"]$/, '$1');
       setAmount(birr);
        
       try {
         const response = await axios.get('https://localhost:44372/api/Chapa/GetChapaListBank');
         if (response) {
             serBanks(response.data)
-            console.log(banks[0].Name)
-
+            await chapaPage();
         }
       } catch (err) {
         console.log(err);
       }
     }
   };
-
-  const isButtonDisabled = firstName === '' || lastName === '';
+ 
+const chapaPage=async()=>{
+      try{ 
+    const resURL= await axios.post("https://localhost:44372/api/Chapa/ChapaPay", {
+      id:(Math.random() + 1).toString(36).substring(7),
+      eamil: emlnoQout,
+      fName: firstName.toString(),
+      lName: lastName.toString(),
+      amount: amount,
+      isPaid: true
+      });
+       if(resURL){
+        setIsLoading(false);
+        window.location.href = resURL.data;
+       }
+}catch(err){
+  console.log(err)
+}
+}
+//
+const isButtonDisabled = firstName === '' || lastName === '';
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);

@@ -39,11 +39,10 @@ namespace WebApplication1.Controllers
                  firstName: puser.fName,
                  lastName: puser.lName,
                  tx_ref: puser.Id,
-                 callback_url: "https://ሽንኩርት.com"
+                 callback_url: "http://localhost:3000/chapa"
                 );
             var Result = await chapa.RequestAsync(Request);
-            await Task.Delay(TimeSpan.FromSeconds(5));
-            var isValid = await chapa.VerifyAsync(puser.Id);
+             var isValid = await chapa.VerifyAsync(puser.Id);
             if (Result.Status == "success")
             {
                 var dbPrem = new PremiumUser
@@ -57,9 +56,8 @@ namespace WebApplication1.Controllers
                 };
                 await _dbContext.premiumUsers.AddAsync(dbPrem);
                  _dbContext.SaveChanges();
-              return Result.Status;
+              return Result.CheckoutUrl;
             }
-           
             return Result.Message;
         }
 

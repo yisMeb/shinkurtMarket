@@ -18,6 +18,8 @@ function Commodity() {
   const { t, i18n } = useTranslation();
   const [activeRowsCom, setActiveRowsCom] = useState([]); // Track active state for each row
   const [fav, setFav] = useState("");
+  const [FavAddFaild,setAddFavFaild]=useState(false);
+  const [FavRemFaild,setRemFavFaild]=useState(false);
 
   const datetoday= new Date();
   useEffect(() => {
@@ -150,21 +152,31 @@ return (
                   const stikper = chngPerCol == 'green' ? ( <TiArrowSortedUp /> ) : (<AiFillCaretDown /> );
                   //  
                 const handleColorChange = async (isActive, user) => {
+                  let re=null
+                  let rr=null 
                   if (!isActive) {
-                     try {
-                     await axios.post("https://localhost:44372/Favorite", {
+                    try {
+                     re = await axios.post("https://localhost:44372/Favorite", {
                      favoriteName: user.name,
                      email: email2
-                     });
+                     }); 
+                     if(!re){
+                      //mot added
+                      setAddFavFaild(true)
+                     }
                      } catch (error) {
                       console.log(error);
                      }
                      }else{
                      try {
-                     await axios.post("https://localhost:44372/FavoriteRemove", {
+                     rr= await axios.post("https://localhost:44372/FavoriteRemove", {
                      favoriteName: user.name,
                      email: email2
                      });
+                     if(!rr){
+                      //not removed
+                      setRemFavFaild(true)
+                     }
                      } catch (error) {
                      console.log(error);
                     }
