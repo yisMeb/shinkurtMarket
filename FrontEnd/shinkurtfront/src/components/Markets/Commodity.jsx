@@ -208,6 +208,7 @@ function Commodity() {
                     <td className="name-column">
                       <Link
                         to="/history"
+                        //to="/tempdashboard"
                         state={user.name}
                         className="link-info text-decoration-none"
                       >

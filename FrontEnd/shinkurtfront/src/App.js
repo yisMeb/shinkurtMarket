@@ -18,7 +18,7 @@ import translationEN from "./localization/en-US.json";
 import translationAM from "./localization/am-ET.json";
 import UserDashboard from "./components/Dashbord/UserDashboard";
 //to test dashboard
-import TempDashboard from "./components/Dashbord/TempDashboard";
+//import TempDashboard from "./components/Dashbord/TempDashboard";
 i18n.init({
   resources: {
     "en-US": {
@@ -49,7 +49,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<UserDashboardLayout />} />
-          <Route path="/tempdashboard" element={<TempDashboard />} />
+          {/*<Route path="/tempdashboard" element={<TempDashboard />} />*/}
           <Route path="/history" element={<HandleClickHistory />} />
         </Routes>
       </div>
