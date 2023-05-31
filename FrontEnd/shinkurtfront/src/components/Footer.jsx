@@ -22,7 +22,7 @@ function Footer() {
        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
        <h5 className="text-uppercase mb-4 font-weight-bold">ሽንኩርት</h5>
             <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, culpa corrupti. Provident eos odit asperiores ipsa molestias!
+            {t("Innovative market data platform revolutionizing analysis and insights for the digital development of our country.")}
             </p>
        </div>
        <hr className="w-100 clearfix d-md-none"/>
