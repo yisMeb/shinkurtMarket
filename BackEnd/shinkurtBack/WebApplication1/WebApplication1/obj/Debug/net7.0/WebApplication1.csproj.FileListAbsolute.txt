@@ -164,3 +164,7 @@ C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplic
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Flurl.dll
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Flurl.Http.dll
 C:\Users\asus\Downloads\gituploads\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Wongel Dawit\Desktop\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Chapa.NET.dll
+C:\Users\Wongel Dawit\Desktop\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Flurl.dll
+C:\Users\Wongel Dawit\Desktop\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Flurl.Http.dll
+C:\Users\Wongel Dawit\Desktop\shinkurtMarket\BackEnd\shinkurtBack\WebApplication1\WebApplication1\bin\Debug\net7.0\Newtonsoft.Json.dll
