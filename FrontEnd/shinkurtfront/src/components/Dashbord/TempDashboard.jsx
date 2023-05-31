@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Commodity from "./../Markets/Commodity";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useTable, usePagination } from "react-table";
+import "./../../index.css";
+import "./Scenes/line";
+import Line from "./Scenes/line";
+import "../Histories/HandleClickHistory";
+import HandleClickHistory from "../Histories/HandleClickHistory";
 
 const UserDashboard = () => {
   const [selectedLink, setSelectedLink] = useState(null);
@@ -38,8 +45,7 @@ const UserDashboard = () => {
       }
       case "favtable":
         return <TableComponent />;
-      case "dashboard":
-        return <DashboardComponent />;
+
       default:
         return <Commodity />;
     }
@@ -60,13 +66,7 @@ const UserDashboard = () => {
             className="text-center p-4 text-left"
             onClick={() => handleLinkClick("favtable")}
           >
-            Favourite
-          </li>
-          <li
-            className="text-center p-4 text-left"
-            onClick={() => handleLinkClick("dashboard")}
-          >
-            Dashboard
+            Favourites
           </li>
         </ul>
       </div>
@@ -86,10 +86,6 @@ const GraphComponent = () => {
 
 const TableComponent = () => {
   return <div>Table Component</div>;
-};
-
-const DashboardComponent = () => {
-  return <div>Dashboard Component</div>;
 };
 
 export default UserDashboard;

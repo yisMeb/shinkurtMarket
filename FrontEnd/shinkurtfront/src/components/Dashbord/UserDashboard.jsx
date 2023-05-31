@@ -1,148 +1,144 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Commodity from "./../Markets/Commodity";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useTable, usePagination } from "react-table";
 import "./../../index.css";
 import "./Scenes/line";
 import Line from "./Scenes/line";
-import moment from "moment";
-import Button from "react-bootstrap/Button";
-
-const Sidebar = () => {
-  return (
-    //a div in bootstrap that is below the header
-
-    <div className="sidebar" id="navbarNav">
-      <ul className="sidebar-menu">
-        <li>
-          <a href="#">Sign Out</a>
-        </li>
-        <li>
-          <a href="#">Compare</a>
-        </li>
-        <li>
-          <a href="#">View History</a>
-        </li>
-        <li>
-          <a href="#">Download Data</a>
-        </li>
-      </ul>
-    </div>
-  );
-};
-
-const ChartComponent = () => {
-  const [startDate, setStartDate] = useState([]);
-  const [endDate, setEndDate] = useState([]);
-
-  const handleStartDateChange = (event) => {
-    setStartDate(event.target.value);
-  };
-
-  const handleEndDateChange = (event) => {
-    setEndDate(event.target.value);
-  };
-
-  // Rest of the component code...
-
-  return (
-    <div>
-       <label>
-        Start Date:
-        <input type="date" value={startDate} onChange={handleStartDateChange} />
-      </label>
-
-      <label>
-        End Date:
-        <input type="date" value={endDate} onChange={handleEndDateChange} />
-      </label>
-
-      {/* Render the chart using the selected date range */}
-    </div>
-  );
-};
+import "../Histories/HandleClickHistory";
+import HandleClickHistory from "../Histories/HandleClickHistory";
 
 const UserDashboard = () => {
-  const [data, setData] = useState([]);
-  const [startDate, setStartDate] = useState([]);
-  const [endDate, setEndDate] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://localhost:44372/api/GoldHistorical/GetGoldHistoryAll"
-        );
-        const parsedData = response.data.map((item) => ({
-          g_id: parseFloat(item.g_id),
-          //date: moment(item.date, "dd/mm/yyyy").toDate(),
-          date: item.date,
-          price: parseFloat(item.price),
-          open: parseFloat(item.open),
-          high: parseFloat(item.high),
-          low: parseFloat(item.low),
-          last: parseFloat(item.last),
-          volume: parseFloat(item.volume),
-          changePercentage: parseFloat(item.changePercentage),
-        }));
+  const [selectedLink, setSelectedLink] = useState(null);
+  //logout function is working
+  const handleLogout = async (e) => {
+    console.log("logout");
+    e.preventDefault();
+    try {
+      //its working
+      const response = await axios.post("https://localhost:44372/Logout");
 
-        setData(parsedData);
-        //console.log("hereeeeee");
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
+      console.log(response.status);
 
-  const datePriceData = data.map(({ date, price }) => ({
-    x: date,
-    y: price,
-  }));
-  console.log(datePriceData);
-
-  const dateChangePercentageData = data.map(({ date, changePercentage }) => ({
-    x: date,
-    y: changePercentage,
-  }));
-  //select date for veiewing data
-  const handleStartDateChange = (event) => {
-    setStartDate(event.target.value);
+      // remove token and email from local storage
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+    } catch (error) {
+      // Handle error
+      console.error(error);
+    }
+    return <Navigate replace to="/home" />;
   };
 
-  const handleEndDateChange = (event) => {
-    setEndDate(event.target.value);
+  const handleLinkClick = (link) => {
+    setSelectedLink(link);
   };
 
-  const dateChangePercentageData2 = data
-    .filter(({ Date }) => {
-      // Assuming Date is a string in the format 'YYYY-MM-DD'
-      if (startDate && endDate) {
-        return Date >= startDate && Date <= endDate;
+  const renderContent = () => {
+    switch (selectedLink) {
+      case "fulltable": {
+        return <GraphComponent />;
       }
-      if (startDate) {
-        return Date >= startDate;
-      }
-      if (endDate) {
-        return Date <= endDate;
-      }
-      return true; // No date filter applied
-    })
-    .map(({ Date, changePercentage }) => ({
-      x: Date,
-      y: changePercentage,
-    }));
+      case "favtable":
+        return <TableComponent />;
 
-  console.log(dateChangePercentageData2);
+      default:
+        return <Commodity />;
+    }
+  };
+
   return (
-    <div className="admin-dashboard">
-      <Sidebar />
-      <div className="content">
-        <h1>Line Graph Examples</h1>
-        <h2>Date vs Price</h2>
-        <Line data={[{ id: "line", data: datePriceData }]} />
-        <h2>Date vs Change Percentage</h2>
-        <Line data={[{ id: "line", data: dateChangePercentageData }]} />
+    <div className="d-flex" style={{ marginTop: "30px" }}>
+      {/* Sidebar */}
+      <div className="sidebar" style={{ marginTop: "120px" }}>
+        <ul className="list-unstyled">
+          <li
+            className="text-center p-4 text-left"
+            onClick={() => handleLinkClick("fulltable")}
+          >
+            Full Table
+          </li>
+          <li
+            className="text-center p-4 text-left"
+            onClick={() => handleLinkClick("favtable")}
+          >
+            Favourites
+          </li>
+        </ul>
+      </div>
+
+      {/* Main Content */}
+      <div className="container">
+        {/* Central Area */}
+        <div className="central-area">{renderContent()}</div>
       </div>
     </div>
   );
 };
 
+const GraphComponent = () => {
+  return <Commodity />;
+};
+
+const TableComponent = () => {
+  return <div>Table Component</div>;
+};
+
 export default UserDashboard;
+
+{
+  /* 
+
+
+<div className="content-margin-overlap">
+        <div className="container d-flex justify-content-between">
+          <div className="text-center shadow p-5 text-left">
+            <span className="text-align-top">
+              <BsFire color="red" />
+             {t('Trending')}
+            </span>
+            <ol>
+              <li>
+                <Link to="/">XAU_USD</Link>
+              </li>
+              <li>
+                <Link to="/">Gold</Link>
+              </li>
+            </ol>
+          </div>
+          <div className="text-center shadow p-5 d-flex flex-column">
+            <span className="font-weight-bold">
+              <BiTimeFive />
+              {t('Recently Added')}
+            </span>
+            <ol>
+              <li>
+                <Link to="/">XAU_USD</Link>
+              </li>
+              <li>
+                <Link to="/">Gold</Link>
+              </li>
+            </ol>
+          </div>
+          <div className="text-center shadow p-5">
+            <span className="font-weight-bold">
+              <AiFillStar style={{ color: '#FCD611' }} />
+              {t('Articles')}
+            </span>
+            <ol>
+              <li>
+                <Link to="/">Buy Stock</Link>
+              </li>
+              <li>
+                <Link to="/">Gold Price</Link>
+              </li>
+            </ol>
+          </div>
+        </div>
+        </div>
+*/
+}

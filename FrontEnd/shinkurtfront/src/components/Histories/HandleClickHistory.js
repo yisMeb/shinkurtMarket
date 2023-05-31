@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import "./../../index.css";
 import { useTable, usePagination } from "react-table";
-import linedrawer from "./../Dashbord/Scenes/line.jsx";
+import "./../../index.css";
+import "./../Dashbord/Scenes/line";
+import Line from "./../Dashbord/Scenes/line";
 
-function HandleClickHistory({ nameClick }) {
+const HandleClickHistory = ({ nameClick }) => {
   const location = useLocation();
   console.log(typeof location.state);
   const [data, setData] = useState([]);
@@ -76,7 +79,6 @@ function HandleClickHistory({ nameClick }) {
     };
     fetchData();
   }, []);
-  //find x and y values to display in the graph
   const datePriceData = data.map(({ date, price }) => ({
     x: date,
     y: price,
@@ -97,6 +99,8 @@ function HandleClickHistory({ nameClick }) {
     x: date,
     y: changePercentage,
   }));
+
+  //find x and y values to display in the graph
 
   const columns = useMemo(
     () => [
@@ -134,18 +138,36 @@ function HandleClickHistory({ nameClick }) {
     },
     usePagination
   );
+  if (localStorage.getItem("token") === null) {
+    window.location.reload(true);
+    return <Link replace to="/signin" />;
+  }
 
   return (
     <div className="content-margin-overlap container">
+      <div className="header" style={{ marginTop: "120px" }}>
+        <ul className="list-unstyled">
+          <Link to="/dashboard">
+            <li className="p-2 text-left">Dashboard</li>
+          </Link>
+        </ul>
+      </div>
       <h2>Historical Data of {location.state}</h2>
       <div className="container">
         <div className="mt-2">
-          <h2>Price not working and not showing graph below</h2>
-          <linedrawer data={[{ id: "line", data: datePriceData }]} />
-          <h2>Change Percentage</h2>
-          <linedrawer data={[{ id: "line", data: dateChangePercentageData }]} />
-
           <div>
+            <div>
+              <h4>Change Percentage of {location.state}</h4>
+              <Line data={[{ id: "line", data: dateChangePercentageData }]} />
+              <h4>Price Change of {location.state}</h4>
+              <Line data={[{ id: "line", data: datePriceData }]} />
+              <h4>Opening Price of {location.state}</h4>
+              <Line data={[{ id: "line", data: dateOpenData }]} />
+              <h4>High Price of {location.state}</h4>
+              <Line data={[{ id: "line", data: dateHighData }]} />
+              <h4>Low Price of {location.state}</h4>
+              <Line data={[{ id: "line", data: dateLowData }]} />
+            </div>
             <h3>Data Table</h3>
             <table className="table table-striped" {...getTableProps()}>
               <thead>
@@ -243,6 +265,5 @@ function HandleClickHistory({ nameClick }) {
       </div>
     </div>
   );
-}
-
+};
 export default HandleClickHistory;
