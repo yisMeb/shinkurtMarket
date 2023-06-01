@@ -57,6 +57,17 @@ const HandleClickHistory = ({ nameClick }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const token = localStorage.getItem("token");
+        // Check if the user is signed in
+        if (!token) {
+          // Redirect to sign-in page
+          window.location.reload(true);
+          window.location.href = "/signin";
+
+          // Link ('/signin');
+          return;
+        }
+
         const response = await axios.get(url);
         const parsedData = response.data
           .map((item) => ({
@@ -138,10 +149,6 @@ const HandleClickHistory = ({ nameClick }) => {
     },
     usePagination
   );
-  if (localStorage.getItem("token") === null) {
-    window.location.reload(true);
-    return <Link replace to="/signin" />;
-  }
 
   return (
     <div className="content-margin-overlap container">

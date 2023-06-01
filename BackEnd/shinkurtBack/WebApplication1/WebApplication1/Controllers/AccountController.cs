@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
             _dbContext = dbContext;
         }
       
-       // [HttpPost]
+       //method to signup
         [Route("SignUp")]
         [AcceptVerbs("POST")]
         public async Task<IActionResult> SignUp([FromBody] User signupModel)
@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
             return BadRequest(ModelState);
 
         }
-       // [HttpPost]
+       //method to login
         [Route("Login")]
         [AcceptVerbs("POST")]
         public async Task<IActionResult> Login([FromBody] Login loginModel)
@@ -79,12 +79,47 @@ namespace WebApplication1.Controllers
             return BadRequest(ModelState);
           
         }
+        //method to logout
         [Route("Logout")]
         [AcceptVerbs("POST")]
         public async Task<IActionResult> LoginOut()
         {
             await signInManager.SignOutAsync();
             return Ok("Logged Out");
+        }
+        //Method to change password
+        [Route("ChangePassword")]
+        [AcceptVerbs("POST")]
+        public async Task<IActionResult> ChangePassword(string username, string currentPassword, string newPassword)
+        {
+            var user = await userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                // Handle user not found
+                return NotFound();
+            }
+
+            var isPasswordValid = await userManager.CheckPasswordAsync(user, currentPassword);
+
+            if (!isPasswordValid)
+            {
+                // Handle incorrect current password
+                return BadRequest("Incorrect current password");
+            }
+
+            var result = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+
+            if (result.Succeeded)
+            {
+                // Password updated successfully
+                return Ok("Password updated successfully");
+            }
+            else
+            {
+                // Handle password update failure
+                return BadRequest("Failed to update password");
+            }
         }
     }
     
